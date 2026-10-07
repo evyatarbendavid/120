@@ -29,6 +29,14 @@ log "source has $(ls "$SKILLS" | wc -l) skills"
 command -v ffmpeg >/dev/null 2>&1 || \
   apt-get install -y --no-install-recommends ffmpeg >/dev/null 2>&1 || log "ffmpeg not installed"
 
+# yt-dlp: the `watch` skill downloads videos with it.
+if ! command -v yt-dlp >/dev/null 2>&1; then
+  python3 -m pip install -q yt-dlp >/dev/null 2>&1 \
+    || python3 -m pip install -q --break-system-packages yt-dlp >/dev/null 2>&1 \
+    || log "yt-dlp not installed"
+fi
+command -v yt-dlp >/dev/null 2>&1 && log "yt-dlp $(yt-dlp --version 2>&1 | head -1)"
+
 # 1) user level
 mkdir -p "$HOME/.claude/skills"
 cp -r --update=none "$SKILLS/." "$HOME/.claude/skills/" 2>/dev/null

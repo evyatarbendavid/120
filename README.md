@@ -15,7 +15,7 @@ Cloud sessions load skills from the checked-out repo's `.claude/skills`, not fro
 `~/.claude/skills`. The script therefore copies the skills into every checked-out repo,
 adds them to `.git/info/exclude` (so `git status` stays clean and nothing is committed by
 accident), never overwrites an existing file, and writes a log to `/tmp/personal-setup.log`.
-It also adds a Playwright MCP config (`.mcp.json`) where a repo has none.
+It also adds a Playwright MCP config (`.mcp.json`) where a repo has none, and installs `yt-dlp` (used by the `watch` skill) and `ffmpeg`.
 
 ## What is here
 
