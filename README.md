@@ -1,6 +1,6 @@
 # my-skills
 
-A mirror of the open-source Claude skills I use (459 of them), plus a setup
+A mirror of the open-source Claude skills I use (460 of them), plus a setup
 script that makes them available in every Claude Code cloud session on any repo.
 
 ## How it is used
