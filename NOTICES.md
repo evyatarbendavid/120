@@ -15,3 +15,7 @@ below and keeps its original license. Full license texts are in `LICENSES/`, and
 | `frontend-design`, `algorithmic-art`, `brand-guidelines`, `canvas-design`, `claude-api`, `doc-coauthoring`, `internal-comms`, `mcp-builder`, `slack-gif-creator`, `theme-factory`, `web-artifacts-builder`, `webapp-testing`, `academy-guide`, `discernment-nudge` | [anthropics/skills](https://github.com/anthropics/skills) | Apache 2.0 |
 | 21 HyperFrames skills (`hyperframes`, `hyperframes-*`, `media-use`, `motion-graphics`, `slideshow`, `product-launch-video`, ...) | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | Apache 2.0 |
 | `ai-video-editing-workflow` | Original skill, written for this repository. Its principles are distilled from a practitioner's guide on AI video editing by Roy Shavit (2026) and rewritten in new words; no text or templates were copied. | Same as this repository |
+| `hallmark` | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) (`skills/hallmark`) | MIT |
+| `avoid-ai-design` | [funboy322/avoid-ai-design](https://github.com/funboy322/avoid-ai-design) (skill, references and scanner; demo pages left out) | MIT |
+| `humanizer` | [blader/humanizer](https://github.com/blader/humanizer) | MIT |
+| `avoid-ai-writing` | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) (skill, patterns, detector, helper scripts, examples) | MIT |
