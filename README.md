@@ -17,6 +17,13 @@ adds them to `.git/info/exclude` (so `git status` stays clean and nothing is com
 accident), never overwrites an existing file, and writes a log to `/tmp/personal-setup.log`.
 It also adds a Playwright MCP config (`.mcp.json`) where a repo has none, and installs `yt-dlp` (used by the `watch` skill) and `ffmpeg`.
 
+## Standing rule: add only, never remove
+
+Skills are only ever **added** to this repository. Never delete, rename away or replace a skill
+that is already here, and never shrink one. Fixes and updates to an existing skill are additive
+edits. The only way a skill leaves is if the owner explicitly asks for that skill by name. The
+setup script follows the same rule: it copies, it never overwrites or deletes a skill.
+
 ## How things get added
 
 This repository is the single source for what every Claude Code session gets. New skills,
