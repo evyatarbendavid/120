@@ -21,7 +21,7 @@ It also adds a Playwright MCP config (`.mcp.json`) where a repo has none, and in
 
 Skills are only ever **added** to this repository. Never delete, rename away or replace a skill
 that is already here, and never shrink one. Fixes and updates to an existing skill are additive
-edits. The only way a skill leaves is if the owner explicitly asks for that skill by name. The
+edits. A skill leaves only if the owner asks for it by name, or if it does something actually harmful (hidden data theft, destructive actions, self-installing hooks); in that case report it to the owner. Disclosed analytics, opt-in API calls and documentation about attacks are not harmful, so those skills stay. The
 setup script follows the same rule: it copies, it never overwrites or deletes a skill.
 
 ## How things get added
