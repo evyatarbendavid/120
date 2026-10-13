@@ -1,6 +1,6 @@
 # my-skills
 
-A mirror of the open-source Claude skills I use (464 of them), plus a setup
+A mirror of the open-source Claude skills I use (465 of them), plus a setup
 script that makes them available in every Claude Code cloud session on any repo.
 
 ## How it is used
@@ -49,3 +49,10 @@ from this repo into `%USERPROFILE%\.claude\skills`, never overwriting existing o
 - `scripts/personal-setup.sh` — the setup script.
 
 Nothing private is in this repository.
+
+## Checking what is here
+
+`python3 -I scripts/scan-skills.py out.json .claude/skills` runs a static scan (it executes nothing) over
+every skill: hook wiring, download-and-run, obfuscation, credential access, exfiltration channels, destructive
+commands, prompt-injection phrases, hidden Unicode, secrets, binaries and broken files. Run it on anything new
+before it is added, and read every hit; most are documentation about security rather than anything harmful.
