@@ -49,7 +49,7 @@ for R in "$REPOS_ROOT"/*/; do
   [ -d "$R/.git" ] || continue
   EXC="$R/.git/info/exclude"; mkdir -p "$R/.git/info"; touch "$EXC"
   mkdir -p "$R/.claude/skills"
-  added=0
+  added=0; agents_added=0
   for S in "$SKILLS"/*/; do
     n="$(basename "$S")"
     [ -e "$R/.claude/skills/$n" ] && continue
@@ -61,7 +61,7 @@ for R in "$REPOS_ROOT"/*/; do
       [ -f "$A" ] || continue
       n="$(basename "$A")"
       [ -e "$R/.claude/agents/$n" ] && continue
-      cp "$A" "$R/.claude/agents/$n" && echo "/.claude/agents/$n" >> "$EXC"
+      cp "$A" "$R/.claude/agents/$n" && echo "/.claude/agents/$n" >> "$EXC" && agents_added=$((agents_added+1))
     done
   fi
   if [ ! -e "$R/.mcp.json" ] && [ -n "$CHROME" ]; then
@@ -69,7 +69,7 @@ for R in "$REPOS_ROOT"/*/; do
     echo "/.mcp.json" >> "$EXC"
     log "$R: wrote .mcp.json (playwright)"
   fi
-  log "$R: +$added skills; now $(ls "$R/.claude/skills" | wc -l) in .claude/skills; untracked in git status: $(git -C "$R" status --porcelain 2>/dev/null | wc -l)"
+  log "$R: +$added skills, +$agents_added agents; now $(ls "$R/.claude/skills" | wc -l) in .claude/skills, $(ls "$R/.claude/agents" 2>/dev/null | wc -l) in .claude/agents; untracked in git status: $(git -C "$R" status --porcelain 2>/dev/null | wc -l)"
 done
 
 # 3) Playwright MCP at user scope too
