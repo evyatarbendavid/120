@@ -20,6 +20,7 @@ below and keeps its original license. Full license texts are in `LICENSES/`, and
 | `humanizer` | [blader/humanizer](https://github.com/blader/humanizer) | MIT |
 | `avoid-ai-writing` | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) (skill, patterns, detector, helper scripts, examples) | MIT |
 | `moneyprinterturbo-video` | [harry0703/MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) (`docs/skill/`: `SKILL.md` and `mpt_agent.py`). **Modified**: a "Local notes" section was appended to `SKILL.md` (Hebrew voices, no secrets in chat, free routes only, Windows/macOS only); everything above it is upstream text. | MIT |
+| 13 Instagram skills: `ig-reel` (26 hook formulas in `hooks.json`, hook scorer, beat sheet), `ig-viral`, `ig-caption`, `ig-carousel`, `ig-story`, `ig-profile`, `ig-plan`, `ig-comment`, `ig-reply`, `ig-dm`, `ig-repurpose`, `ig-audit`, `ig-human` | [Jakeschincariol/instagram-agent-skill](https://github.com/Jakeschincariol/instagram-agent-skill) (`skills/`; the voice template is in `templates/instagram-voice.md`) | MIT |
 
 ## Security review (2026-10-13)
 
@@ -41,4 +42,5 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
   dependencies, installs `uv` through the official installer if missing, and prints sponsor links.
 - Documentation inside `unsloth` and `axolotl` shows the official `curl | sh` installers for `uv` and Ollama.
   They are text only; nothing runs them.
+- The `ig-*` skills (added 2026-10-18) use only the Python standard library: no network, no installs, and they write only to a path the user names. `ig-reel/hooks.json` is a list of video hook formulas, not Claude Code hooks. The skills never log in to Instagram, never post and never automate comments or DMs. The scorers are tuned for English: Hebrew text runs without errors but scores lower than it should, so treat those scores as rough.
 - `ui-styling/scripts/.coverage` is a harmless leftover SQLite file from the upstream author.
