@@ -37,6 +37,13 @@ if ! command -v yt-dlp >/dev/null 2>&1; then
 fi
 command -v yt-dlp >/dev/null 2>&1 && log "yt-dlp $(yt-dlp --version 2>&1 | head -1)"
 
+# Social links (open-social-link skill): deno lets yt-dlp read YouTube, curl_cffi lets it
+# read TikTok, and the browser must trust the cloud proxy or every page is a certificate error.
+pipq() { python3 -m pip install -q "$@" >/dev/null 2>&1 || python3 -m pip install -q --break-system-packages "$@" >/dev/null 2>&1; }
+command -v deno >/dev/null 2>&1 || pipq deno || log "deno not installed"
+python3 -c "import curl_cffi" >/dev/null 2>&1 || pipq curl_cffi || log "curl_cffi not installed"
+[ -f "$SKILLS/open-social-link/scripts/trust-proxy-ca.sh" ] && bash "$SKILLS/open-social-link/scripts/trust-proxy-ca.sh" 2>&1 | while read -r l; do log "$l"; done
+
 # 1) user level
 mkdir -p "$HOME/.claude/skills"
 cp -r --update=none "$SKILLS/." "$HOME/.claude/skills/" 2>/dev/null
