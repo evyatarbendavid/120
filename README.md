@@ -56,3 +56,8 @@ Nothing private is in this repository.
 every skill: hook wiring, download-and-run, obfuscation, credential access, exfiltration channels, destructive
 commands, prompt-injection phrases, hidden Unicode, secrets, binaries and broken files. Run it on anything new
 before it is added, and read every hit; most are documentation about security rather than anything harmful.
+
+## Catalog
+
+`CATALOG.html` lists every library and skill by topic, in Hebrew, with the command that runs each one.
+The owner's published copy: https://claude.ai/artifact/2Rts9zT1GJKfwdWAv8u9hU . When a skill or library is added here, rebuild and republish it.
