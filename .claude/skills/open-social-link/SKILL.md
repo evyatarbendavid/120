@@ -23,6 +23,14 @@ Written for this repository. It turns a link the user pasted into things you can
 3. Read `transcript.txt`. A small model mishears words, so mark guesses and do not invent text.
 4. Answer what the user asked, in their language. Say what you saw and heard, not what you assume.
 
+## Any other link
+
+The helper tries every link the same way. yt-dlp reads about 1,800 video sites (Vimeo, X/Twitter,
+Reddit, Dailymotion, Twitch, Google Drive and Dropbox shares, and more). If it cannot, the helper
+fetches the link directly: a direct video file becomes `video.mp4`, and an ordinary web page is saved
+as `page.txt` (title, description and readable text) so you can still read it; for how the page looks,
+open it with the Playwright browser tool. For YouTube it saves the title, channel and thumbnail.
+
 ## When it fails
 
 The helper prints `DOWNLOAD_FAILED` and a `WHY` line. Pass that on plainly, then:
@@ -30,9 +38,9 @@ The helper prints `DOWNLOAD_FAILED` and a `WHY` line. Pass that on plainly, then
 - **YouTube "not a bot"**: YouTube blocks cloud servers. Give what the page shows (title, channel,
   description) if the browser tool can open it, and say the video itself opens in a Local session
   on the user's own computer.
-- **Network policy (403, CONNECT failed)**: run `curl -sS "$HTTPS_PROXY/__agentproxy/status"`; its
-  `recentRelayFailures` list the refused hosts. Ask the user to add exactly those under the cloud
-  environment's Network access > Allowed domains, then open a new session.
+- **Network policy (`REFUSED_HOSTS ...`)**: the cloud environment does not allow that site. Give the
+  user the exact host names to add under the environment's Network access > Allowed domains (or to set
+  Network access to Full, which opens every site), then open a new session.
 - **Login wall or 429 on Instagram**: a whole profile needs an account from a cloud server. Ask for a
   link to the single reel or post.
 - **The browser (Playwright) shows a certificate error on every site**: run
