@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Open a social video link: metadata, the video file, a frame grid and the audio.
+"""Open a social video link or a local video file: metadata, the video file, a frame grid and the audio.
 
-usage: open_link.py URL [--out DIR] [--transcribe] [--model small] [--lang he]
+usage: open_link.py URL_OR_FILE [--out DIR] [--transcribe] [--model small] [--lang he]
 
 Downloads with yt-dlp (720p at most), writes info.json, video.mp4, grid.jpg (8 frames
 spread over the video, for looking at), audio.wav (16 kHz mono) and, with
@@ -52,15 +52,31 @@ def main():
     ap.add_argument("--lang", default=None, help="language code, e.g. he or en (default: detect)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    video = os.path.join(a.out, "video.mp4")
+    info = {}
+    local = os.path.expanduser(a.url)
+    if os.path.isfile(local):
+        # A file the user attached or uploaded (for example ~/.claude/uploads/...): no download.
+        r = run(["ffmpeg", "-loglevel", "error", "-y", "-i", local, "-c", "copy", "-movflags", "+faststart", video])
+        if r.returncode != 0:
+            r = run(["ffmpeg", "-loglevel", "error", "-y", "-i", local, "-vf", "scale=-2:'min(720,ih)'",
+                     "-c:v", "libx264", "-preset", "veryfast", "-c:a", "aac", video])
+        if r.returncode != 0 or not os.path.exists(video):
+            print("OPEN_FAILED")
+            print((r.stderr or "").strip().splitlines()[-1] if (r.stderr or "").strip() else "(not a video ffmpeg can read)")
+            sys.exit(2)
+        info = {"title": os.path.basename(local), "source_file": local}
+        json.dump(info, open(os.path.join(a.out, "info.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print("INFO", os.path.join(a.out, "info.json"))
+        print("TITLE", info["title"], "| local file")
+        return finish(a, video, info)
     if not shutil.which("yt-dlp"):
         sys.exit("yt-dlp is not installed: python3 -m pip install yt-dlp")
 
-    video = os.path.join(a.out, "video.mp4")
     r = run(["yt-dlp", "--no-playlist", "--write-info-json", "--no-write-playlist-metafiles",
              "-f", "b[height<=720]/bv*[height<=720]+ba/b", "--merge-output-format", "mp4",
              "-o", os.path.join(a.out, "video.%(ext)s"), a.url], timeout=600)
     info_path = os.path.join(a.out, "video.info.json")
-    info = {}
     if os.path.exists(info_path):
         info = json.load(open(info_path, encoding="utf-8"))
         keep = {k: info.get(k) for k in ("title", "uploader", "channel", "duration", "upload_date",
@@ -78,9 +94,18 @@ def main():
         if advice:
             print("WHY", advice)
         sys.exit(2)
-    print("VIDEO", video)
+    return finish(a, video, info)
 
-    dur = float(info.get("duration") or 0) or 30.0
+
+def finish(a, video, info):
+    print("VIDEO", video)
+    dur = float(info.get("duration") or 0)
+    if not dur:
+        p = run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video])
+        try:
+            dur = float(p.stdout.strip())
+        except ValueError:
+            dur = 30.0
     step = max(dur / 8.0, 0.5)
     grid = os.path.join(a.out, "grid.jpg")
     run(["ffmpeg", "-loglevel", "error", "-y", "-i", video, "-vf",
