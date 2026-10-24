@@ -17,6 +17,12 @@ adds them to `.git/info/exclude` (so `git status` stays clean and nothing is com
 accident), never overwrites an existing file, and writes a log to `/tmp/personal-setup.log`.
 It also adds a Playwright MCP config (`.mcp.json`) where a repo has none, and installs `yt-dlp` (used by the `watch` skill) and `ffmpeg`.
 
+## Standing rule: skills written here
+
+Any skill written in a session (for the owner or by the owner) goes into `.claude/skills/` in this
+repository, so the setup script copies it into `~/.claude/skills` and into every checked-out repo of
+every new cloud session. Add it to `CATALOG.html` and `NOTICES.md` at the same time.
+
 ## Standing rule: add only, never remove
 
 Skills are only ever **added** to this repository. Never delete, rename away or replace a skill
