@@ -49,6 +49,23 @@ mkdir -p "$HOME/.claude/skills"
 cp -r --update=none "$SKILLS/." "$HOME/.claude/skills/" 2>/dev/null
 log "user level: $(ls "$HOME/.claude/skills" | wc -l) entries in ~/.claude/skills"
 
+# Standing instructions for every session, in the user-level CLAUDE.md that Claude Code loads
+# everywhere. Added once (marked), never overwrites what is already in the file.
+MEM="$HOME/.claude/CLAUDE.md"
+if ! grep -q "skill-router (from evyatarbendavid/120)" "$MEM" 2>/dev/null; then
+  cat >> "$MEM" <<'MEMEOF'
+
+<!-- skill-router (from evyatarbendavid/120) -->
+## Before building anything
+When the user asks to build, create, make, design, write, edit or produce something non-trivial
+(a site, page, app, video, reel, animation, logo, bot, automation, campaign, document, deck, code),
+use the `skill-router` skill first: it scans every installed skill and agent and picks the best ones
+for the job. Then do the work with them. Skip it for questions and small edits.
+Never register a hook in any settings file without the owner's explicit yes.
+MEMEOF
+  log "added skill-router instructions to ~/.claude/CLAUDE.md"
+fi
+
 # 2) project level, in every checked-out repo (this is what cloud sessions load)
 CHROME="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome 2>/dev/null | head -1)"
 for R in "$REPOS_ROOT"/*/; do
