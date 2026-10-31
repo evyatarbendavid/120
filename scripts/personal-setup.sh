@@ -65,6 +65,18 @@ Never register a hook in any settings file without the owner's explicit yes.
 MEMEOF
   log "added skill-router instructions to ~/.claude/CLAUDE.md"
 fi
+if ! grep -q "find-a-way (from evyatarbendavid/120)" "$MEM" 2>/dev/null; then
+  cat >> "$MEM" <<'MEMEOF'
+
+<!-- find-a-way (from evyatarbendavid/120) -->
+## When something fails or looks impossible
+Before telling the user something cannot be done (an error, a blocked site, a missing tool or access),
+use the `find-a-way` skill: search the saved ways, then try every legitimate route, and save the route
+that worked so every session knows it. Never go around the network allowlist, logins, captchas,
+TLS checks or permission settings; ask the owner for the one thing only they can do.
+MEMEOF
+  log "added find-a-way instructions to ~/.claude/CLAUDE.md"
+fi
 
 # 2) project level, in every checked-out repo (this is what cloud sessions load)
 CHROME="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome 2>/dev/null | head -1)"

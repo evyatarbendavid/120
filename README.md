@@ -1,6 +1,6 @@
 # my-skills
 
-A mirror of the open-source Claude skills I use (569 of them) and 285 subagents in `.claude/agents/`, plus a setup
+A mirror of the open-source Claude skills I use (570 of them) and 285 subagents in `.claude/agents/`, plus a setup
 script that makes them available in every Claude Code cloud session on any repo.
 
 ## How it is used
