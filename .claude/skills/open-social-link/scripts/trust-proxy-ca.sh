@@ -4,7 +4,10 @@
 # proxy's own CA certificates (subject O = Anthropic) from the bundle the cloud
 # environment provides, into the user's browser trust store. Safe to run twice.
 BUNDLE="${CA_BUNDLE:-/root/.ccr/ca-bundle.crt}"
-[ -f "$BUNDLE" ] || { echo "trust-proxy-ca: no $BUNDLE (not a cloud session?)"; exit 0; }
+# In a cloud session the environment creates this bundle a little after the setup script runs,
+# and then adds the proxy certificate to the browser store itself (nickname ccr-agent-proxy).
+# So a missing bundle at setup time is expected and nothing needs doing.
+[ -f "$BUNDLE" ] || { echo "trust-proxy-ca: no $BUNDLE yet; the cloud environment adds the proxy certificate to the browser itself, so nothing to do"; exit 0; }
 command -v certutil >/dev/null 2>&1 || apt-get install -y -q --no-install-recommends libnss3-tools >/dev/null 2>&1
 command -v certutil >/dev/null 2>&1 || { echo "trust-proxy-ca: certutil unavailable"; exit 0; }
 DB="sql:$HOME/.pki/nssdb"; mkdir -p "$HOME/.pki/nssdb"

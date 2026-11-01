@@ -125,6 +125,20 @@ for R in "$REPOS_ROOT"/*/; do
     printf '{\n  "mcpServers": {\n    "playwright": {\n      "command": "npx",\n      "args": ["@playwright/mcp@latest", "--executable-path=%s", "--no-sandbox"]\n    }\n  }\n}\n' "$CHROME" > "$R/.mcp.json"
     echo "/.mcp.json" >> "$EXC"
     log "$R: wrote .mcp.json (playwright)"
+  elif [ -f "$R/.mcp.json" ] && [ -n "$CHROME" ]; then
+    # An existing .mcp.json is never replaced, but a Playwright browser path that no longer
+    # exists (the image moved to a newer Chromium) is swapped for the current one. Only that
+    # one argument changes; the rest of the file is kept byte for byte.
+    python3 - "$R/.mcp.json" "$CHROME" <<'PYEOF' && log "$R: .mcp.json had a missing browser path; now $CHROME"
+import os, re, sys
+p, chrome = sys.argv[1], sys.argv[2]
+s = open(p).read()
+def fix(m):
+    return m.group(1) + (m.group(2) if os.access(m.group(2), os.X_OK) else chrome)
+new = re.sub(r'(--executable-path=)([^"\s]+)', fix, s)
+if new == s: sys.exit(1)
+open(p, "w").write(new)
+PYEOF
   fi
   log "$R: +$added skills, +$agents_added agents; now $(ls "$R/.claude/skills" | wc -l) in .claude/skills, $(ls "$R/.claude/agents" 2>/dev/null | wc -l) in .claude/agents; untracked in git status: $(git -C "$R" status --porcelain 2>/dev/null | wc -l)"
 done
