@@ -52,7 +52,7 @@ log "user level: $(ls "$HOME/.claude/skills" | wc -l) entries in ~/.claude/skill
 # Skill listing size (approved by the owner on 2026-11-01). By default Claude Code spends 1% of the
 # context window on skill descriptions, so with ~580 skills only ~30 show what they do and the rest
 # appear as bare names that are never picked automatically. These two settings show every skill with
-# up to 250 characters of description (~37k tokens). Merged into ~/.claude/settings.json; every other
+# up to 250 characters of description (~40k tokens; 0.05 still left ~30 at the end as bare names). Merged into ~/.claude/settings.json; every other
 # key in that file is kept. Not a hook.
 python3 - "$HOME/.claude/settings.json" <<'PYEOF' && log "skill listing: every skill shown with a description (settings.json)"
 import json, os, sys
@@ -61,7 +61,7 @@ try:
     cur = json.load(open(p)) if os.path.exists(p) else {}
 except Exception:
     sys.exit(0)  # never rewrite a settings file this script cannot read
-cur.setdefault("skillListingBudgetFraction", 0.05)
+cur.setdefault("skillListingBudgetFraction", 0.065)
 cur.setdefault("skillListingMaxDescChars", 250)
 os.makedirs(os.path.dirname(p), exist_ok=True)
 json.dump(cur, open(p, "w"), indent=2)
