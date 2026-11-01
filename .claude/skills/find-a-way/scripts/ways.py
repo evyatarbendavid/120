@@ -6,7 +6,8 @@ usage:
   ways.py add --title T --problem P --solution S [--tags "a,b"] [--tried "what failed"]
               [--verify "how to check it worked"] [--not-for "when it does not apply"]
               [--trailer "Co-Authored-By: ..."]... [--no-push]
-  ways.py owner "<the owner's instruction>" [--trailer ...]   (add to OWNER.md and push)
+  ways.py owner [--skill <name>] "<the owner's instruction>" [--trailer ...]
+                                                     (add to that skill's OWNER.md and push to 120)
   ways.py push <slug> [--trailer ...]                 (retry the 120 push of a way saved locally)
   ways.py list
   ways.py show <slug>
@@ -263,7 +264,7 @@ def ident():
     return ["-c", "user.name=Claude", "-c", "user.email=noreply@anthropic.com"]
 
 
-def sparse_clone():
+def sparse_clone(rel=None):
     """A tiny fresh clone holding only the ways folder, in a temp dir; the user's own clones are never touched."""
     tmp = tempfile.mkdtemp(prefix="find-a-way-120-")
     r = git(tmp, "clone", "-q", "--depth", "1", "--filter=blob:none", "--sparse", REPO, "120", timeout=300)
@@ -271,7 +272,7 @@ def sparse_clone():
         shutil.rmtree(tmp, ignore_errors=True)
         return None, (r.stderr or r.stdout).strip()[:300]
     clone = os.path.join(tmp, "120")
-    git(clone, "sparse-checkout", "set", SKILL_REL.replace(os.sep, "/"))
+    git(clone, "sparse-checkout", "set", (rel or SKILL_REL).replace(os.sep, "/"))
     return clone, ""
 
 
@@ -343,20 +344,20 @@ def cmd_push(a):
     print(push_to_120(a.slug, None, None, meta["title"], a.trailer or [], local_file=src))
 
 
-OWNER_HEAD = ("# Owner's additions to find-a-way\n\n"
+OWNER_HEAD = ("# Owner's additions to {skill}\n\n"
               "Instructions the owner added. Read them before everything else in SKILL.md and follow them;\n"
-              "they take priority over SKILL.md's defaults. Added with `ways.py owner \"<text>\"`; nothing here is\n"
-              "ever deleted except at the owner's request.\n\n")
+              "they take priority over SKILL.md's defaults. Added with find-a-way's `ways.py owner [--skill <name>] \"<text>\"`;\n"
+              "nothing here is ever deleted except at the owner's request.\n\n")
 
 
 def owner_line(text):
     return f"- {datetime.date.today().isoformat()}: {' '.join(text.split())}\n"
 
 
-def add_owner(folder_skill, line):
+def add_owner(folder_skill, line, skill="find-a-way"):
     os.makedirs(folder_skill, exist_ok=True)
     path = os.path.join(folder_skill, "OWNER.md")
-    cur = open(path, encoding="utf-8").read() if os.path.exists(path) else OWNER_HEAD
+    cur = open(path, encoding="utf-8").read() if os.path.exists(path) else OWNER_HEAD.replace("{skill}", skill)
     if line.split(": ", 1)[1] in cur:
         return path, False
     with open(path, "w", encoding="utf-8") as fh:
@@ -365,6 +366,10 @@ def add_owner(folder_skill, line):
 
 
 def cmd_owner(a):
+    skill = a.skill or "find-a-way"
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", skill):
+        sys.exit("--skill takes a skill's folder name (lowercase letters, digits, hyphens)")
+    skill_rel = os.path.join(".claude", "skills", skill)
     text = " ".join(a.text).strip()
     if not text:
         sys.exit("give the instruction to add, in quotes")
@@ -372,28 +377,37 @@ def cmd_owner(a):
     if hits:
         sys.exit("REFUSED: looks like private data (OWNER.md goes to a public repo): " + "; ".join(hits))
     line = owner_line(text)
-    home = os.path.dirname(write_dir())
-    path, added = add_owner(home, line)
+    if os.environ.get("FIND_A_WAY_HOME"):
+        home = os.path.dirname(write_dir()) if skill == "find-a-way" else os.path.join(os.path.dirname(write_dir()), skill)
+    else:
+        home = os.path.join(os.path.expanduser("~"), ".claude", "skills", skill)
+    if not os.environ.get("FIND_A_WAY_HOME") and not os.path.isfile(os.path.join(home, "SKILL.md")):
+        sys.exit(f"no skill named {skill} in ~/.claude/skills")
+    path, added = add_owner(home, line, skill)
     print(f"{'ADDED' if added else 'ALREADY THERE'} {path}")
-    if (not os.environ.get("FIND_A_WAY_HOME") and os.path.realpath(HERE) != os.path.realpath(home)
-            and not in_120_checkout(HERE)):
-        add_owner(HERE, line)
+    if (skill == "find-a-way" and not os.environ.get("FIND_A_WAY_HOME")
+            and os.path.realpath(HERE) != os.path.realpath(home) and not in_120_checkout(HERE)):
+        add_owner(HERE, line, skill)
     if a.no_push or os.environ.get("FIND_A_WAY_NO_PUSH") == "1" or os.environ.get("FIND_A_WAY_HOME"):
         print("PUSH_SKIPPED (no-push mode)")
         return
     err = ""
     for attempt in range(4):
-        clone, why = sparse_clone()
+        clone, why = sparse_clone(skill_rel)
         if clone is None:
             print(f"PUSH_SKIPPED could not clone 120: {why}")
             return
-        _, changed = add_owner(os.path.join(clone, SKILL_REL), line)
+        if not os.path.isfile(os.path.join(clone, skill_rel, "SKILL.md")):
+            shutil.rmtree(os.path.dirname(clone), ignore_errors=True)
+            print(f"PUSH_SKIPPED 120 has no skill named {skill} (add the skill to 120 first)")
+            return
+        _, changed = add_owner(os.path.join(clone, skill_rel), line, skill)
         if not changed:
             shutil.rmtree(os.path.dirname(clone), ignore_errors=True)
             print("PUSH_SKIPPED 120 already has this instruction")
             return
-        git(clone, "add", os.path.join(SKILL_REL, "OWNER.md"))
-        msg = "find-a-way: owner adds an instruction" + (("\n\n" + "\n".join(a.trailer)) if a.trailer else "")
+        git(clone, "add", os.path.join(skill_rel, "OWNER.md"))
+        msg = f"{skill}: owner adds an instruction" + (("\n\n" + "\n".join(a.trailer)) if a.trailer else "")
         git(clone, *ident(), "commit", "-q", "-m", msg)
         p = git(clone, "push", "-q", "origin", "HEAD:main", timeout=300)
         shutil.rmtree(os.path.dirname(clone), ignore_errors=True)
@@ -463,6 +477,7 @@ def main():
     sh.add_argument("slug")
     ow = sub.add_parser("owner")
     ow.add_argument("text", nargs="+")
+    ow.add_argument("--skill", help="which skill's OWNER.md (default find-a-way); works for any skill in ~/.claude/skills and 120")
     ow.add_argument("--trailer", action="append")
     ow.add_argument("--no-push", action="store_true")
     pu = sub.add_parser("push")

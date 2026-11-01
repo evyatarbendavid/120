@@ -51,6 +51,18 @@ HEB = {
     "טלגרם": "telegram bot", "ריאקט": "react", "נקסט": "nextjs next", "פריסה": "deploy deployment vercel",
     "להעלות": "deploy publish upload", "דומיין": "domain dns", "נגישות": "accessibility a11y wcag",
     "מהיר": "performance speed", "ביצועים": "performance", "ai": "ai llm", "בינה": "ai llm",
+    # added 2026-11-01: business, money and deals
+    "עסקים": "business", "עסקי": "business", "כסף": "money revenue profit", "להרוויח": "profit revenue money",
+    "רווח": "profit margin", "רווחים": "profit margin", "הכנסה": "revenue income", "הזדמנות": "opportunity business",
+    "הזדמנויות": "opportunity opportunities business", "עסקה": "deal business", "עסקאות": "deals business",
+    "ויראלי": "viral trend", "ויראליים": "viral trends", "ויראלית": "viral", "טרנד": "trend viral", "טרנדים": "trends viral",
+    "מתחרים": "competitors competitor", "מתחרה": "competitor", "זול": "cheap price sourcing", "בזול": "cheap sourcing price",
+    "למכור": "sell sales selling", "מכירה": "sale sales", "לקנות": "buy purchase", "יבוא": "import sourcing",
+    "סיטונאי": "wholesale supplier", "דרופשיפ": "dropshipping", "השקעה": "investment", "משא": "negotiation",
+    "מומחה": "expert", "שיווקי": "marketing", "פרסומת": "ad ads", "פרסומות": "ads creative",
+    "לחפש": "search find", "חיפוש": "search find", "תמצא": "find search", "דרך": "way route",
+    "לא": "", "עובד": "working fix", "חסום": "blocked access", "גישה": "access",
+    "אינסטגרמי": "instagram", "רשתות": "social media", "סטורי": "story instagram", "קרוסלה": "carousel instagram",
 }
 STOP = set("the a an and or to of for in on with my me i we you it this that is are be do make build create want need please "
            "של את על עם לי שלי זה זאת אני אתה רוצה צריך תבנה תעשה תכין ליצור לבנות משהו כמו גם וגם או אבל כי".split())
@@ -173,7 +185,7 @@ def expand(query):
         out.append(t)
         for heb, eng in HEB.items():
             if t == heb or (len(t) > 3 and t.endswith(heb) and len(heb) > 2) or (len(t) > 3 and t[1:] == heb):
-                out += eng.split()
+                out += eng.split()  # an empty expansion just drops the word
     return out
 
 

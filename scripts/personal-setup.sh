@@ -49,6 +49,24 @@ mkdir -p "$HOME/.claude/skills"
 cp -r --update=none "$SKILLS/." "$HOME/.claude/skills/" 2>/dev/null
 log "user level: $(ls "$HOME/.claude/skills" | wc -l) entries in ~/.claude/skills"
 
+# Skill listing size (approved by the owner on 2026-11-01). By default Claude Code spends 1% of the
+# context window on skill descriptions, so with ~580 skills only ~30 show what they do and the rest
+# appear as bare names that are never picked automatically. These two settings show every skill with
+# up to 250 characters of description (~37k tokens). Merged into ~/.claude/settings.json; every other
+# key in that file is kept. Not a hook.
+python3 - "$HOME/.claude/settings.json" <<'PYEOF' && log "skill listing: every skill shown with a description (settings.json)"
+import json, os, sys
+p = sys.argv[1]
+try:
+    cur = json.load(open(p)) if os.path.exists(p) else {}
+except Exception:
+    sys.exit(0)  # never rewrite a settings file this script cannot read
+cur.setdefault("skillListingBudgetFraction", 0.05)
+cur.setdefault("skillListingMaxDescChars", 250)
+os.makedirs(os.path.dirname(p), exist_ok=True)
+json.dump(cur, open(p, "w"), indent=2)
+PYEOF
+
 # Standing instructions for every session, in the user-level CLAUDE.md that Claude Code loads
 # everywhere. Added once (marked), never overwrites what is already in the file.
 MEM="$HOME/.claude/CLAUDE.md"
@@ -79,7 +97,10 @@ MEMEOF
 fi
 
 # 2) project level, in every checked-out repo (this is what cloud sessions load)
-CHROME="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome 2>/dev/null | head -1)"
+# Prefer the stable link the image keeps current (/opt/pw-browsers/chromium); fall back to any
+# versioned build in either folder layout (chrome-linux or chrome-linux64).
+if [ -x /opt/pw-browsers/chromium ]; then CHROME=/opt/pw-browsers/chromium
+else CHROME="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux*/chrome 2>/dev/null | sort -V | tail -1)"; fi
 for R in "$REPOS_ROOT"/*/; do
   R="${R%/}"
   [ -d "$R/.git" ] || continue
