@@ -47,6 +47,8 @@ python3 -c "import curl_cffi" >/dev/null 2>&1 || pipq curl_cffi || log "curl_cff
 # 1) user level
 mkdir -p "$HOME/.claude/skills"
 cp -r --update=none "$SKILLS/." "$HOME/.claude/skills/" 2>/dev/null
+# web-hunter's skill_hunter.py vets downloaded skills with this scanner; keep a copy it can find.
+[ -f "$HERE/scripts/scan-skills.py" ] && cp "$HERE/scripts/scan-skills.py" "$HOME/.claude/skills/.scan-skills.py" 2>/dev/null
 log "user level: $(ls "$HOME/.claude/skills" | wc -l) entries in ~/.claude/skills"
 
 # Skill listing size (approved by the owner on 2026-11-01). By default Claude Code spends 1% of the
