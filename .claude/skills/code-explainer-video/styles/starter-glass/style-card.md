@@ -1,0 +1,11 @@
+# starter-glass (style card)
+- Name: starter-glass
+- Look: dark violet gradient background with slow drifting colour blobs; one frosted-glass card (rounded, thin light border) holds the picture of each beat.
+- Motion: the title pops in with a small overshoot, the card slides up 60px and fades in, and the picture inside always moves (waves scroll, rings expand, bars fall).
+- How it explains: one idea per beat, shown as a moving picture inside the card; one short title above and at most one muted line below.
+- Palette: bg #0B0910 to #17131F, text #F4F1FB, muted #ABA4BF, violet #7C5CFF, light violet #B8A8FF, amber #FFB547.
+- Fonts: Heebo 700 (falls back to Arial); titles 104px, sub-lines 56px, canvas 1080x1920.
+- Layout: title near the top, card in the middle, one muted line under the card, everything inside x 60-940 and y 250-1500 (a thin progress line at the top is the only exception).
+- Sound: soft whoosh before each beat, a pop when the title lands, one low hit on the key moment, a two-note chime at the end. At most 3 at once, all quiet.
+- Hard rules: max 6 words in a title; something moves in every beat; no frame still for more than 2 seconds; every frame is a pure function of time.
+- Made by the author of the skill as a plain starter. It is not copied from any library.
