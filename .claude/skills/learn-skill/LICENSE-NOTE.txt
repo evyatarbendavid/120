@@ -1,0 +1,8 @@
+License note (added when this skill was copied)
+
+Source: https://github.com/koganei/learn-anything-skill
+The repository has no LICENSE file. Its README.md, section "License", says:
+
+    MIT License - feel free to use and modify as needed.
+
+No copyright holder is named. Author: koganei. Unmodified except that the packaged .skill archive was left out.
