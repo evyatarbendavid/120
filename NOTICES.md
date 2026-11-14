@@ -83,3 +83,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `long-ai-video-pack` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `model-ab-test` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `prompt-remix` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
+| `short-drama-5-steps` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
