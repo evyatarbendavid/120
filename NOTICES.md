@@ -72,3 +72,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 - `ui-styling/scripts/.coverage` is a harmless leftover SQLite file from the upstream author.
 | `motion-brief` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `ai-influencer-builder` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
+| `blender-to-seedance` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
