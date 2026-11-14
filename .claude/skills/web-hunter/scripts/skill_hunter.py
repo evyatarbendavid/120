@@ -33,7 +33,7 @@ DONT_COPY_FILES = {"hooks.json", "settings.json", "settings.local.json", "plugin
 # License families that may be redistributed in the public mirror. Copyleft is allowed but flagged.
 LICENSES = [
     (r"MIT License|Permission is hereby granted, free of charge", "MIT", True),
-    (r"Apache License,? Version 2\.0", "Apache-2.0", True),
+    (r"Apache License,?\s+Version 2\.0", "Apache-2.0", True),
     (r"Redistribution and use in source and binary forms|BSD \d-Clause", "BSD", True),
     (r"\bISC License\b", "ISC", True),
     (r"CC0|public domain dedication|released into the public domain", "CC0/Public-Domain", True),
