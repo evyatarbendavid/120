@@ -87,3 +87,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `shot-budgeter` | [https://github.com/Malik-rgb43/ai-video-course-skills](https://github.com/Malik-rgb43/ai-video-course-skills), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `agent-desktop` | [https://github.com/vercel-labs/agent-desktop](https://github.com/vercel-labs/agent-desktop), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `agent-desktop-linux` | [https://github.com/vercel-labs/agent-desktop](https://github.com/vercel-labs/agent-desktop), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
+| `agent-desktop-macos` | [https://github.com/vercel-labs/agent-desktop](https://github.com/vercel-labs/agent-desktop), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
