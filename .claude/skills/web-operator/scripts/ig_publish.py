@@ -45,7 +45,10 @@ def token():
 
 
 def call(a, method, path, params=None):
-    url = f"https://{a.host}/{a.api_version}/{path.lstrip('/')}"
+    base = os.environ.get("IG_PUBLISH_TEST_BASE")  # tests only: a local mock server on 127.0.0.1
+    if base and not base.startswith("http://127.0.0.1:"):
+        sys.exit("IG_PUBLISH_TEST_BASE may only point at http://127.0.0.1 (tests)")
+    url = f"{base or 'https://' + a.host}/{a.api_version}/{path.lstrip('/')}"
     data = None
     if params and method == "GET":
         url += "?" + urllib.parse.urlencode(params)
@@ -64,7 +67,7 @@ def call(a, method, path, params=None):
         except ValueError:
             msg = body[:200]
         hint = ""
-        if e.code in (400, 401) and "OAuth" in body:
+        if e.code == 401 or '"code":190' in body.replace(" ", ""):  # 190 = invalid or expired token
             hint = ("\nHINT no valid token. In a cloud session ask the owner through the credential form "
                     f"(host {a.host}, Authorization: Bearer). Never ask for it in chat.")
         sys.exit(f"API ERROR HTTP {e.code} {msg}{hint}")
