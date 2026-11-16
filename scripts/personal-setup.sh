@@ -98,7 +98,10 @@ MEMEOF
   log "added find-a-way instructions to ~/.claude/CLAUDE.md"
 fi
 
-# 2) project level, in every checked-out repo (this is what cloud sessions load)
+# 2) project level, in every checked-out repo: agents and the Playwright .mcp.json only.
+# Skills are NOT copied into repos any more (2026-11-16): a skill only in ~/.claude/skills was shown
+# to load in a cloud session, so the per-repo copy only doubled disk use (~75MB per repo).
+# Set COPY_SKILLS_TO_REPOS=1 to get the old behaviour.
 # Prefer the stable link the image keeps current (/opt/pw-browsers/chromium); fall back to any
 # versioned build in either folder layout (chrome-linux or chrome-linux64).
 if [ -x /opt/pw-browsers/chromium ]; then CHROME=/opt/pw-browsers/chromium
@@ -107,13 +110,15 @@ for R in "$REPOS_ROOT"/*/; do
   R="${R%/}"
   [ -d "$R/.git" ] || continue
   EXC="$R/.git/info/exclude"; mkdir -p "$R/.git/info"; touch "$EXC"
-  mkdir -p "$R/.claude/skills"
   added=0; agents_added=0
-  for S in "$SKILLS"/*/; do
-    n="$(basename "$S")"
-    [ -e "$R/.claude/skills/$n" ] && continue
-    cp -r "$S" "$R/.claude/skills/$n" && echo "/.claude/skills/$n/" >> "$EXC" && added=$((added+1))
-  done
+  if [ "${COPY_SKILLS_TO_REPOS:-0}" = "1" ]; then
+    mkdir -p "$R/.claude/skills"
+    for S in "$SKILLS"/*/; do
+      n="$(basename "$S")"
+      [ -e "$R/.claude/skills/$n" ] && continue
+      cp -r "$S" "$R/.claude/skills/$n" && echo "/.claude/skills/$n/" >> "$EXC" && added=$((added+1))
+    done
+  fi
   if [ -d "$AGENTS" ]; then
     mkdir -p "$R/.claude/agents"
     for A in "$AGENTS"/*.md; do
@@ -142,7 +147,7 @@ if new == s: sys.exit(1)
 open(p, "w").write(new)
 PYEOF
   fi
-  log "$R: +$added skills, +$agents_added agents; now $(ls "$R/.claude/skills" | wc -l) in .claude/skills, $(ls "$R/.claude/agents" 2>/dev/null | wc -l) in .claude/agents; untracked in git status: $(git -C "$R" status --porcelain 2>/dev/null | wc -l)"
+  log "$R: +$added skills, +$agents_added agents; now $(ls "$R/.claude/skills" 2>/dev/null | wc -l) in .claude/skills, $(ls "$R/.claude/agents" 2>/dev/null | wc -l) in .claude/agents; untracked in git status: $(git -C "$R" status --porcelain 2>/dev/null | wc -l)"
 done
 
 # 3) Playwright MCP at user scope too
