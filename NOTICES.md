@@ -91,3 +91,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `agent-desktop-macos` | [https://github.com/vercel-labs/agent-desktop](https://github.com/vercel-labs/agent-desktop), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `agent-desktop-windows` | [https://github.com/vercel-labs/agent-desktop](https://github.com/vercel-labs/agent-desktop), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
 | `learn-skill` | [https://github.com/koganei/learn-anything-skill](https://github.com/koganei/learn-anything-skill), via web-hunter 2026-11-14. Vetted with scan-skills.py (no HIGH findings). | MIT |
+| `animate` | [https://github.com/cth9191/animate](https://github.com/cth9191/animate), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
