@@ -104,3 +104,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `rive-react` | [https://github.com/stevysmith/rive-skills](https://github.com/stevysmith/rive-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `rive-scripting` | [https://github.com/stevysmith/rive-skills](https://github.com/stevysmith/rive-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `rive-web` | [https://github.com/stevysmith/rive-skills](https://github.com/stevysmith/rive-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
+| `text-to-lottie` | [https://github.com/diffusionstudio/lottie](https://github.com/diffusionstudio/lottie), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
