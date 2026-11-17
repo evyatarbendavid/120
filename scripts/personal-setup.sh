@@ -69,6 +69,27 @@ os.makedirs(os.path.dirname(p), exist_ok=True)
 json.dump(cur, open(p, "w"), indent=2)
 PYEOF
 
+# Read-only connector tools (Higgsfield balance, Vercel prices, Canva/Figma/Drive reads...) pre-allowed, owner
+# approved 2026-11-17, so they never stall on a prompt or a failing auto-mode check. List: scripts/permissions-allow.json
+# (read/list/search/quote only; nothing that creates, sends, posts, deletes, buys or spends credits). Only adds
+# entries to permissions.allow; never removes one, never touches deny/ask. Not a hook.
+python3 - "$HOME/.claude/settings.json" "$HERE/scripts/permissions-allow.json" <<'PYEOF' && log "permissions: read-only connector tools allowed (settings.json)"
+import json, os, sys
+p, src = sys.argv[1], sys.argv[2]
+try:
+    cur = json.load(open(p)) if os.path.exists(p) else {}
+    want = json.load(open(src))["allow"]
+except Exception:
+    sys.exit(1)
+perm = cur.setdefault("permissions", {})
+if not isinstance(perm, dict): sys.exit(1)
+allow = perm.setdefault("allow", [])
+if not isinstance(allow, list): sys.exit(1)
+allow += [r for r in want if r not in allow]
+os.makedirs(os.path.dirname(p), exist_ok=True)
+json.dump(cur, open(p, "w"), indent=2)
+PYEOF
+
 # Standing instructions for every session, in the user-level CLAUDE.md that Claude Code loads
 # everywhere. Added once (marked), never overwrites what is already in the file.
 MEM="$HOME/.claude/CLAUDE.md"
@@ -96,6 +117,18 @@ that worked so every session knows it. Never go around the network allowlist, lo
 TLS checks or permission settings; ask the owner for the one thing only they can do.
 MEMEOF
   log "added find-a-way instructions to ~/.claude/CLAUDE.md"
+fi
+if ! grep -q "connectors (from evyatarbendavid/120)" "$MEM" 2>/dev/null; then
+  cat >> "$MEM" <<'MEMEOF'
+
+<!-- connectors (from evyatarbendavid/120) -->
+## Connected services (Higgsfield, Canva, Figma, Vercel, Gmail, Drive, Notion, Shopify)
+Their tools are deferred: load them with ToolSearch ("select:mcp__Higgsfield__balance" or "+Higgsfield ...") before
+calling. Never tell the owner there is no access to a connected service before trying that; if it says the server needs
+sign-in, call one of its tools once (that reconnects), and only then ask the owner to re-authorize in claude.ai Connectors.
+Read-only tools are pre-allowed; creating, posting, sending, buying or spending credits still needs the owner's yes.
+MEMEOF
+  log "added connector instructions to ~/.claude/CLAUDE.md"
 fi
 
 # 2) project level, in every checked-out repo (this is what cloud sessions load)
