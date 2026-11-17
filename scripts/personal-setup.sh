@@ -56,15 +56,28 @@ log "user level: $(ls "$HOME/.claude/skills" | wc -l) entries in ~/.claude/skill
 # appear as bare names that are never picked automatically. These two settings show every skill with
 # up to 250 characters of description (~40k tokens; 0.05 still left ~30 at the end as bare names). Merged into ~/.claude/settings.json; every other
 # key in that file is kept. Not a hook.
-python3 - "$HOME/.claude/settings.json" <<'PYEOF' && log "skill listing: every skill shown with a description (settings.json)"
+# Also (2026-11-17, owner asked to cut the per-session cost): the skills in scripts/skill-listing-tiers.json
+# "name_only" are listed by name only (skillOverrides), which saved ~33k tokens of a ~94k prompt in a
+# measured test with no change in which skill Claude picks. An entry the owner already has is never changed.
+python3 - "$HOME/.claude/settings.json" "$HERE/scripts/skill-listing-tiers.json" <<'PYEOF' && log "skill listing: descriptions for most skills, names only for the bulk libraries (settings.json)"
 import json, os, sys
-p = sys.argv[1]
+p, tiers = sys.argv[1], sys.argv[2]
 try:
     cur = json.load(open(p)) if os.path.exists(p) else {}
 except Exception:
     sys.exit(0)  # never rewrite a settings file this script cannot read
 cur.setdefault("skillListingBudgetFraction", 0.065)
 cur.setdefault("skillListingMaxDescChars", 250)
+try:
+    t = json.load(open(tiers))
+    keep = set(t.get("keep_full", []))
+    ov = cur.setdefault("skillOverrides", {})
+    if isinstance(ov, dict):
+        for n in t.get("name_only", []):
+            if n not in keep:
+                ov.setdefault(n, "name-only")
+except Exception:
+    pass  # no tier file: every skill keeps its description
 os.makedirs(os.path.dirname(p), exist_ok=True)
 json.dump(cur, open(p, "w"), indent=2)
 PYEOF
