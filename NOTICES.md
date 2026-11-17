@@ -99,3 +99,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `gsap-react` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `gsap-scrolltrigger` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `gsap-timeline` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
+| `gsap-utils` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
