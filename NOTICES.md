@@ -94,3 +94,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `animate` | [https://github.com/cth9191/animate](https://github.com/cth9191/animate), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `gsap-core` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `gsap-frameworks` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
+| `gsap-performance` | [https://github.com/greensock/gsap-skills](https://github.com/greensock/gsap-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
