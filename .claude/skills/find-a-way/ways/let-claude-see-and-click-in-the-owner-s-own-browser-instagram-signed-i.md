@@ -14,3 +14,8 @@ The browser must run where the owner signed in: (1) Claude in Chrome extension f
 
 ## Tried first (did not work)
 Cloud Playwright (not signed in; typing the owner's password is not allowed); list_computer_folders (no Remote Control folders).
+
+## Update 2026-11-17
+**Problem:** Update 2026-11-17: the owner says Cowork no longer exists as a separate mode; it was merged into the regular claude.ai chat.
+
+**Solution:** Point the owner to: (a) the regular chat in the Claude desktop app or claude.ai with the Claude in Chrome extension installed and signed in (enable Chrome there; tools mcp__claude-in-chrome__*), or (b) the Code tab with the environment switched from the cloud ('Default') to Local / their computer, so the session runs on their machine and can use Chrome. Do not tell the owner to open Cowork.
