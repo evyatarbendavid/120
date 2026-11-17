@@ -56,7 +56,7 @@ log "user level: $(ls "$HOME/.claude/skills" | wc -l) entries in ~/.claude/skill
 # appear as bare names that are never picked automatically. These two settings show every skill with
 # up to 250 characters of description (~40k tokens; 0.05 still left ~30 at the end as bare names). Merged into ~/.claude/settings.json; every other
 # key in that file is kept. Not a hook.
-python3 - "$HOME/.claude/settings.json" <<'PYEOF' && log "skill listing: every skill shown with a description (settings.json)"
+python3 - "$HOME/.claude/settings.json" <<'PYEOF' && log "skill listing: budget 0.065, 250 chars per description (settings.json)"
 import json, os, sys
 p = sys.argv[1]
 try:
@@ -68,6 +68,37 @@ cur.setdefault("skillListingMaxDescChars", 250)
 os.makedirs(os.path.dirname(p), exist_ok=True)
 json.dump(cur, open(p, "w"), indent=2)
 PYEOF
+
+# Niche skills listed by NAME ONLY (owner asked 2026-11-17: cut the cost, keep design/sites/video/editing/marketing/
+# social/business skills exactly as they are, keep the same results). scripts/skill-listing-tiers.json holds ~150
+# AI-research, backend-language, healthcare, networking and crypto skills. skill-router/scripts/name_only_index.py
+# writes their exact listing text to skill-router/references/name-only-skills.md, and the CLAUDE.md block below tells
+# Claude to read it when a request touches those areas. Tested: 36 requests x 2 runs, identical picks to the full list.
+# Entries the owner set are never changed; entries this script set earlier and since removed from the tier file are
+# given back their description (tracked in ~/.claude/.120-name-only.json). Not a hook.
+python3 - "$HOME/.claude/settings.json" "$HERE/scripts/skill-listing-tiers.json" "$HOME/.claude/.120-name-only.json" <<'PYEOF' && log "skill listing: niche skills by name only, descriptions in skill-router/references/name-only-skills.md"
+import json, os, sys
+p, tiers, track = sys.argv[1:4]
+try:
+    cur = json.load(open(p)) if os.path.exists(p) else {}
+    want = [n for v in json.load(open(tiers)).get("groups", {}).values() for n in v]
+except Exception:
+    sys.exit(1)
+try:
+    mine = set(json.load(open(track)))
+except Exception:
+    mine = set()
+ov = cur.setdefault("skillOverrides", {})
+if not isinstance(ov, dict): sys.exit(1)
+for n in mine - set(want):
+    if ov.get(n) == "name-only": del ov[n]
+for n in want:
+    if n not in ov: ov[n] = "name-only"; mine.add(n)
+mine = {n for n in mine if ov.get(n) == "name-only"}
+json.dump(cur, open(p, "w"), indent=2)
+json.dump(sorted(mine), open(track, "w"))
+PYEOF
+python3 "$HOME/.claude/skills/skill-router/scripts/name_only_index.py" "$HERE/scripts/skill-listing-tiers.json" "$HOME/.claude/skills" 2>&1 | while read -r l; do log "$l"; done
 
 # Read-only connector tools (Higgsfield balance, Vercel prices, Canva/Figma/Drive reads...) pre-allowed, owner
 # approved 2026-11-17, so they never stall on a prompt or a failing auto-mode check. List: scripts/permissions-allow.json
@@ -129,6 +160,15 @@ sign-in, call one of its tools once (that reconnects), and only then ask the own
 Read-only tools are pre-allowed; creating, posting, sending, buying or spending credits still needs the owner's yes.
 MEMEOF
   log "added connector instructions to ~/.claude/CLAUDE.md"
+fi
+if ! grep -q "name-only skills (from evyatarbendavid/120)" "$MEM" 2>/dev/null; then
+  cat >> "$MEM" <<'MEMEOF'
+
+<!-- name-only skills (from evyatarbendavid/120) -->
+## Skills listed by name only
+About 150 niche skills appear in the skill list as a bare name with no description: AI/ML research and model training (PyTorch, fine-tuning, LLM serving, RAG frameworks, vector databases, experiment tracking), backend and mobile languages (Go, Rust, C++, C#, .NET, Java, Kotlin, Spring Boot, Quarkus, PHP/Laravel, Django, Rails, Perl, Flutter, Android, Kubernetes), healthcare, networking/homelab, manufacturing and crypto. When a request touches any of those areas, first read `~/.claude/skills/skill-router/references/name-only-skills.md` (the exact descriptions the list would have shown) and choose the skill as if those lines were in the list.
+MEMEOF
+  log "added name-only skills instructions to ~/.claude/CLAUDE.md"
 fi
 
 # 2) project level, in every checked-out repo (this is what cloud sessions load)

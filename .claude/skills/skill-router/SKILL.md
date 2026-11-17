@@ -69,3 +69,7 @@ the user's computer, or a decision only the user can make (for example where a s
 - Account skills appear in sessions with a prefix (for example `anthropic-skills:docx`); call them by the
   name the Skill tool lists.
 - If the script finds nothing relevant, say so and work without a skill rather than forcing a poor match.
+- Skills listed by name only (~150 niche ones, see `120/scripts/skill-listing-tiers.json`) are found exactly the
+  same way: the script reads every SKILL.md description from disk and never reads the listing settings, so its
+  ranking is identical with or without the name-only listing. Their listing text is in
+  `references/name-only-skills.md` (written by `scripts/name_only_index.py` at setup) for choosing without the script.
