@@ -33,3 +33,14 @@ engagement. Replies and DMs are drafted for the owner to send (`ig-reply`, `ig-d
 Facebook Pages (`graph.facebook.com`, `ig_publish.py --host graph.facebook.com` for IG via Facebook Login),
 YouTube (Data API), TikTok (Content Posting API, needs app approval), Shopify (connector, drafts). Check
 `ListConnectors` first: a connected service needs no token.
+
+## Browse Instagram signed in (the owner's own browser)
+Instagram shows almost nothing to a logged-out cloud browser (login wall, 429). To browse signed in, use a browser the
+owner signed into THEMSELVES; never type their password, never copy their cookies or session into the cloud.
+- Claude in Chrome (their real Chrome, existing sign-ins): a Local Claude Code session started with `claude --chrome`,
+  or Cowork, with the extension connected. Read the `chrome-browser` skill first.
+- The desktop app's built-in browser: Cowork, or a session linked to their computer. Read `built-in-browser` first;
+  the owner signs in once in the pane and the sign-in persists.
+Rules while signed in: read and browse only. Every like, follow, comment, DM, story reply, post or setting change
+needs the owner's yes for that exact action. Human pace (a few pages a minute, no bulk scrolling or mass profile
+visits), no scraping lists of other people's followers, no personal details out. Prefer the work account.
