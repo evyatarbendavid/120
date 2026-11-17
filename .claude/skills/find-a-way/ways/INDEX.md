@@ -7,6 +7,7 @@ Routes that worked, saved by the find-a-way skill. Search them with
 |---|---|---|
 | [A store site returns nothing or blocks plain HTTP clients](a-store-site-returns-nothing-or-blocks-plain-http-clients.md) | scraping, store, alibaba, curl_cffi, json, bot, product | 2026-10-31 |
 | [Amazon best sellers in a category when amazon.com is blocked (WebSearch badges)](amazon-best-sellers-in-a-category-when-amazon-com-is-blocked-websearch.md) | amazon, best-sellers, ranking, price, websearch, blocked, 403, bought-in-past-month, asinsight | 2026-10-31 |
+| [Connected MCP connector (Higgsfield, Canva, Vercel, Gmail...) looks unavailable or 'no access](connected-mcp-connector-higgsfield-canva-vercel-gmail-looks-unavailabl.md) | mcp, connector, higgsfield, canva, vercel, gmail, toolsearch, deferred, permissions, auto-mode | 2026-11-17 |
 | [Find which GitHub repos are completely empty](find-which-github-repos-are-completely-empty.md) | github, empty, repo, size | 2026-10-31 |
 | [Host blocked by the cloud network allowlist (CONNECT 403)](host-blocked-by-the-cloud-network-allowlist-connect-403.md) | network, proxy, 403, allowlist, blocked, domain | 2026-10-31 |
 | [Make a skill or tool available in every future cloud session](make-a-skill-or-tool-available-in-every-future-cloud-session.md) | skills, persistence, cloud, session, 120, setup | 2026-10-31 |
