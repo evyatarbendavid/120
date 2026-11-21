@@ -32,6 +32,7 @@ purchases, sign-ups or accepted terms without a yes for that exact action. Repor
 
 ## 4. Posting
 Instagram: read `references/instagram.md`, then `scripts/ig_publish.py` (prepare → owner says yes → publish).
+Reading Instagram (profiles, posts, numbers) from any session: `references/instagram.md`, section "Read Instagram from ANY cloud session", and `scripts/ig_read.py`.
 Other platforms: same file, last section.
 
 ## 5. Save what worked

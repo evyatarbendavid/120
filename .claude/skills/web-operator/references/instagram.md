@@ -44,3 +44,21 @@ owner signed into THEMSELVES; never type their password, never copy their cookie
 Rules while signed in: read and browse only. Every like, follow, comment, DM, story reply, post or setting change
 needs the owner's yes for that exact action. Human pace (a few pages a minute, no bulk scrolling or mass profile
 visits), no scraping lists of other people's followers, no personal details out. Prefer the work account.
+
+## Read Instagram from ANY cloud session (public profiles, posts, numbers)
+What a cloud session sees on instagram.com: profile and embed pages answer 200 but hold only an empty login shell,
+and the login page answers 429. Do not scrape, retry or dodge that. Routes that work, in order:
+1. **Official API for other Business/Creator accounts** (local businesses, creators): `scripts/ig_read.py profile <user>`
+   and `posts <user> --limit N` give bio, website, followers, post count and latest posts with captions, likes,
+   comments and links (Meta Business Discovery). Personal and private accounts are not readable. It needs the
+   owner's token once: the owner makes a Facebook-Login token for the work account (instagram_basic, pages_show_list,
+   pages_read_engagement; the account must be Business/Creator linked to a Facebook Page), then Claude calls
+   `request_credential` (host `graph.facebook.com`, Authorization, Bearer). It is saved on the ENVIRONMENT, so every
+   session in it can read from then on. Check: `ig_read.py whoami`. A long-lived user token lasts about 60 days: on a
+   `TOKEN` error ask the owner for a fresh one the same way.
+2. **The owner's own account**: `ig_read.py mine`, or the `ig-account-insights` skill.
+3. **One public reel or post link**: `open-social-link` (yt-dlp). If it answers 429 or a login wall, stop; do not loop.
+4. **What the owner sees while signed in**: Claude in Chrome in a session that runs on their computer, or they send a
+   screenshot or a screen recording from the phone (always works; Claude reads the frames).
+5. **Search engines**: WebSearch with `site:instagram.com "<name>"` finds a business's public handle and bio snippet.
+Never log in for the owner, never ask for the password, never copy cookies into the cloud.
