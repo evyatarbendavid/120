@@ -1,0 +1,2989 @@
+{
+ "_readme": "Task needs for skill-router. Each need: Hebrew/English trigger phrases (string, or [phrase, weight], 'a&b' = both), an English keyword query for the per-need search, a team (lead/support/check skill names, only those installed are shown), optional agents, a note, 'yields_to' (need ids that win when they score at least as high) and 'builtin' (skills that live in Claude's own list, not on disk). Add needs or names freely; never remove ones the owner uses. 'kind': deliverable (something to build or make), capability (a feature or step that supports a deliverable: shown after the deliverables), activity (a task of its own: outreach, research, trading, audits).",
+ "needs": [
+  {
+   "id": "website_build",
+   "label": "בניית אתר / דף",
+   "triggers": [
+    "אתר",
+    "אתרים",
+    "דף נחיתה",
+    "דף בית",
+    "דף מוצר",
+    "דף שירות",
+    "עמוד אישי",
+    "עמוד נחיתה",
+    "landing page",
+    "website",
+    "web site",
+    "homepage",
+    "home page",
+    "webpage",
+    "web page"
+   ],
+   "query": "website landing page web design frontend ui responsive html css",
+   "team": {
+    "lead": [
+     "hallmark"
+    ],
+    "support": [
+     "ui-ux-pro-max",
+     "frontend-design",
+     "ui-styling"
+    ],
+    "check": [
+     "avoid-ai-design",
+     "frontend-a11y",
+     "webapp-testing"
+    ]
+   },
+   "agents": [
+    "UI Designer",
+    "Frontend Developer"
+   ],
+   "note": "Hebrew site: right-to-left, check at phone width. A design skill leads; the build is code.",
+   "yields_to": [
+    "testing_bug",
+    "logo_animation",
+    "app_icon",
+    "analytics",
+    "access_blocked",
+    "ig_read",
+    "site_structure",
+    "leads_outreach",
+    "design_improve",
+    "web_animation",
+    "deploy",
+    "biz_opportunity",
+    "performance",
+    "print_design",
+    "social_link",
+    "seo",
+    "accessibility"
+   ],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "design_improve",
+   "label": "שיפור עיצוב קיים",
+   "triggers": [
+    [
+     "לשפר את העיצוב",
+     4
+    ],
+    [
+     "נראה גנרי",
+     4
+    ],
+    [
+     "גנרי",
+     3
+    ],
+    [
+     "עיצוב מחדש",
+     3
+    ],
+    [
+     "שדרוג עיצוב",
+     3
+    ],
+    "redesign",
+    "ai slop",
+    "looks generic",
+    "נראה לא טוב",
+    "נראה כמו ai"
+   ],
+   "query": "redesign improve design generic ai slop audit visual polish",
+   "team": {
+    "lead": [
+     "avoid-ai-design"
+    ],
+    "support": [
+     "hallmark",
+     "ui-ux-pro-max",
+     "frontend-design",
+     "make-interfaces-feel-better"
+    ],
+    "check": [
+     "frontend-a11y"
+    ]
+   },
+   "agents": [
+    "UI Designer"
+   ],
+   "note": "Audit first: name what looks generic, then rewrite.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "conversion_page",
+   "label": "דף שמוכר / המרות",
+   "triggers": [
+    [
+     "דף נחיתה",
+     2
+    ],
+    [
+     "דף מכירה",
+     3
+    ],
+    [
+     "דף מוצר",
+     2
+    ],
+    "landing page",
+    [
+     "convert",
+     3
+    ],
+    [
+     "המרות",
+     3
+    ],
+    [
+     "המרה",
+     3
+    ],
+    "conversion",
+    "מכירות באתר",
+    "יותר לקוחות מהאתר",
+    "לשפר המרה",
+    [
+     "לקנות מ",
+     3
+    ],
+    [
+     "ללקוחות לקנות",
+     4
+    ],
+    [
+     "יותר מכירות",
+     3
+    ],
+    [
+     "למכור יותר",
+     3
+    ],
+    [
+     "לא קונים",
+     3
+    ],
+    [
+     "שיעור המרה",
+     4
+    ],
+    [
+     "שיעור ההמרה",
+     4
+    ]
+   ],
+   "query": "conversion landing page copy offer headline cta",
+   "team": {
+    "lead": [
+     "cro"
+    ],
+    "support": [
+     "copywriting",
+     "offers",
+     "product-marketing",
+     "hallmark"
+    ],
+    "check": [
+     "ab-testing"
+    ]
+   },
+   "agents": [
+    "Growth Hacker"
+   ],
+   "note": "Offer and copy first, design second.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "booking",
+   "label": "הזמנת תורים / יומן",
+   "triggers": [
+    [
+     "תורים",
+     3
+    ],
+    [
+     "הזמנת תור",
+     4
+    ],
+    [
+     "קביעת תור",
+     4
+    ],
+    [
+     "לקבוע תור",
+     4
+    ],
+    [
+     "מזמינים בו תור",
+     4
+    ],
+    [
+     " תור ",
+     3
+    ],
+    "booking",
+    "appointment",
+    "reservation",
+    "זימון",
+    "schedule appointments",
+    "יומן"
+   ],
+   "query": "booking appointment scheduling calendar reminders backend api database",
+   "team": {
+    "lead": [
+     "backend-patterns"
+    ],
+    "support": [
+     "api-design",
+     "postgres-patterns",
+     "auth"
+    ],
+    "check": [
+     "security-review",
+     "tdd-workflow"
+    ]
+   },
+   "agents": [
+    "Backend Architect"
+   ],
+   "note": "Reminders by WhatsApp or SMS need a messaging provider (cost): ask the owner. Keep bookings in a database, not in the page.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "capability"
+  },
+  {
+   "id": "app_system",
+   "label": "מערכת / CRM / אפליקציית ווב",
+   "triggers": [
+    [
+     "crm",
+     4
+    ],
+    [
+     "ניהול לקוחות",
+     4
+    ],
+    [
+     "מערכת ניהול",
+     4
+    ],
+    [
+     "פאנל ניהול",
+     3
+    ],
+    [
+     "admin panel",
+     3
+    ],
+    [
+     "מערכת",
+     2
+    ],
+    "saas",
+    "ניהול משימות",
+    "פורטל",
+    "portal",
+    "erp",
+    "web app",
+    "מערכת הזמנות",
+    "כרטיסי לקוח",
+    "חשבוניות",
+    "invoices"
+   ],
+   "query": "web application backend api database auth crud admin dashboard",
+   "team": {
+    "lead": [
+     "backend-patterns"
+    ],
+    "support": [
+     "api-design",
+     "postgres-patterns",
+     "frontend-patterns",
+     "auth",
+     "dashboard-builder"
+    ],
+    "check": [
+     "security-review",
+     "tdd-workflow",
+     "verification-loop"
+    ]
+   },
+   "agents": [
+    "Backend Architect",
+    "Software Architect"
+   ],
+   "note": "Decide the stack and where the data lives before building (Vercel needs a hosted database). Never keep customer data in the page.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "mobile_app",
+   "label": "אפליקציה",
+   "triggers": [
+    [
+     "אפליקציית",
+     2
+    ],
+    [
+     "אפליקציה",
+     2
+    ],
+    [
+     "app",
+     1
+    ],
+    [
+     "ios",
+     3
+    ],
+    [
+     "android",
+     3
+    ],
+    [
+     "מובייל",
+     3
+    ],
+    [
+     "נייטיב",
+     3
+    ],
+    "expo",
+    "react native",
+    "flutter",
+    "swift",
+    "pwa"
+   ],
+   "query": "mobile app react native ios android ui reminders notifications",
+   "team": {
+    "lead": [
+     "frontend-patterns"
+    ],
+    "support": [
+     "ui-ux-pro-max",
+     "react-patterns",
+     "react-native-patterns"
+    ],
+    "check": [
+     "e2e-testing"
+    ]
+   },
+   "agents": [
+    "Mobile App Builder",
+    "Rapid Prototyper"
+   ],
+   "note": "A phone-friendly web app (PWA) is the fastest start; native only if the owner needs the app stores.",
+   "yields_to": [
+    "app_icon"
+   ],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "portfolio",
+   "label": "תיק עבודות",
+   "triggers": [
+    [
+     "תיק עבודות",
+     4
+    ],
+    [
+     "תיק עבודה",
+     4
+    ],
+    [
+     "עמוד אישי",
+     3
+    ],
+    [
+     "portfolio",
+     4
+    ],
+    "showcase",
+    [
+     "העבודות שלי",
+     4
+    ],
+    [
+     "להציג את העבודות",
+     4
+    ],
+    [
+     "גלריה",
+     2
+    ],
+    "gallery",
+    "צלם",
+    "photographer",
+    [
+     "להציג עבודות",
+     4
+    ]
+   ],
+   "query": "portfolio website showcase work gallery design personal brand",
+   "team": {
+    "lead": [
+     "hallmark"
+    ],
+    "support": [
+     "ui-ux-pro-max",
+     "frontend-design",
+     "motion-ui"
+    ],
+    "check": [
+     "avoid-ai-design",
+     "seo"
+    ]
+   },
+   "agents": [
+    "UI Designer"
+   ],
+   "note": "The deliverable is a website that shows the work, not the work itself.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "site_structure",
+   "label": "מבנה אתר / ניווט",
+   "triggers": [
+    [
+     "מבנה האתר",
+     3
+    ],
+    [
+     "sitemap",
+     3
+    ],
+    [
+     "ניווט",
+     2
+    ],
+    [
+     "קישורים פנימיים",
+     3
+    ],
+    "site structure",
+    "information architecture",
+    "url structure"
+   ],
+   "query": "site architecture navigation sitemap url structure internal linking",
+   "team": {
+    "lead": [
+     "site-architecture"
+    ],
+    "support": [
+     "seo",
+     "ai-seo"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "capability"
+  },
+  {
+   "id": "web_animation",
+   "label": "אנימציות לאתר / גלילה",
+   "triggers": [
+    [
+     "אנימציות גלילה",
+     4
+    ],
+    [
+     "אנימציית גלילה",
+     4
+    ],
+    [
+     "אנימציה לאתר",
+     4
+    ],
+    [
+     "אנימציות לאתר",
+     4
+    ],
+    [
+     "אנימציות באתר",
+     4
+    ],
+    [
+     "אפקט גלילה",
+     3
+    ],
+    [
+     "אפקטים באתר",
+     3
+    ],
+    "scrolltrigger",
+    "gsap",
+    "parallax",
+    "פרלקס",
+    "scroll animation"
+   ],
+   "query": "web animation gsap scroll scrolltrigger timeline motion",
+   "team": {
+    "lead": [
+     "gsap-scrolltrigger"
+    ],
+    "support": [
+     "gsap-core",
+     "gsap-timeline",
+     "motion-ui",
+     "gsap-performance"
+    ],
+    "check": [
+     "frontend-a11y"
+    ]
+   },
+   "agents": [],
+   "note": "Respect reduced-motion; keep scroll effects light on phones.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "web_3d",
+   "label": "אתר תלת מימד",
+   "triggers": [
+    [
+     "תלת מימד",
+     4
+    ],
+    [
+     "תלת מימדי",
+     4
+    ],
+    [
+     "3d",
+     3
+    ],
+    "three.js",
+    "threejs",
+    "webgl"
+   ],
+   "query": "3d web three.js webgl animation scene interactive",
+   "team": {
+    "lead": [
+     "threejs-animation"
+    ],
+    "support": [
+     "hallmark",
+     "gsap-core",
+     "ui-ux-pro-max"
+    ],
+    "check": [
+     "frontend-a11y"
+    ]
+   },
+   "agents": [
+    "3D & Scene Developer"
+   ],
+   "note": "scroll-world (paid video generation) is optional: ask the owner before using it.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "deploy",
+   "label": "העלאה לאוויר / דומיין",
+   "triggers": [
+    [
+     "להעלות לאוויר",
+     4
+    ],
+    [
+     "לאוויר",
+     3
+    ],
+    "deploy",
+    "vercel",
+    "וורסל",
+    [
+     "דומיין",
+     3
+    ],
+    "domain",
+    "פריסה",
+    "hosting",
+    "אחסון",
+    [
+     "להעלות את האתר",
+     4
+    ],
+    [
+     "לפרסם את האתר",
+     4
+    ],
+    "ssl",
+    "dns"
+   ],
+   "query": "deploy vercel domain dns hosting production environment variables",
+   "team": {
+    "lead": [
+     "vercel-cli"
+    ],
+    "support": [
+     "deployments-cicd",
+     "domains",
+     "env-vars",
+     "nextjs-turbopack"
+    ],
+    "check": [
+     "deployment-patterns"
+    ]
+   },
+   "agents": [],
+   "note": "Vercel tools load through ToolSearch (+Vercel). Buying a domain: quote the price first, then wait for the owner's yes.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "capability"
+  },
+  {
+   "id": "seo",
+   "label": "קידום בגוגל / SEO",
+   "triggers": [
+    [
+     "seo",
+     3
+    ],
+    [
+     "קידום אורגני",
+     4
+    ],
+    [
+     "קידום",
+     2
+    ],
+    [
+     "בגוגל",
+     3
+    ],
+    [
+     "לא מופיע",
+     3
+    ],
+    "מנועי חיפוש",
+    "מילות מפתח",
+    "keywords",
+    "ranking",
+    "אורגני",
+    "serp",
+    "aeo"
+   ],
+   "query": "seo audit search engine ranking schema structured data keywords content",
+   "team": {
+    "lead": [
+     "seo-audit"
+    ],
+    "support": [
+     "seo",
+     "ai-seo",
+     "schema",
+     "content-strategy"
+    ],
+    "check": [
+     "seo-aeo-audit"
+    ]
+   },
+   "agents": [
+    "SEO Specialist"
+   ],
+   "note": "An audit reports findings; fix only what the owner confirms.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "analytics",
+   "label": "מעקב ואנליטיקס",
+   "triggers": [
+    [
+     "ga4",
+     4
+    ],
+    [
+     "google analytics",
+     4
+    ],
+    [
+     "אנליטיקס באתר",
+     3
+    ],
+    [
+     "tracking",
+     3
+    ],
+    [
+     "מעקב אחרי המרות",
+     4
+    ],
+    "פיקסל",
+    "pixel",
+    "utm",
+    "conversion tracking",
+    "כמה אנשים נכנסו"
+   ],
+   "query": "analytics ga4 tracking events conversion attribution utm pixel",
+   "team": {
+    "lead": [
+     "analytics"
+    ],
+    "support": [
+     "attribution",
+     "ab-testing",
+     "cro"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Tracking & Measurement Specialist"
+   ],
+   "note": "Put the tracking ID in the page head and verify page_view events in the realtime report.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "capability"
+  },
+  {
+   "id": "video_short_edit",
+   "label": "עריכת ריל / וידאו קצר",
+   "triggers": [
+    [
+     "ריל",
+     3
+    ],
+    [
+     "רילס",
+     3
+    ],
+    [
+     "reel",
+     3
+    ],
+    [
+     "reels",
+     3
+    ],
+    [
+     "shorts",
+     3
+    ],
+    [
+     "טיקטוק",
+     2
+    ],
+    [
+     "כתוביות",
+     2
+    ],
+    "captions",
+    "subtitles",
+    [
+     "עריכת וידאו",
+     3
+    ],
+    [
+     "עריכת סרטון",
+     3
+    ],
+    [
+     "לערוך סרטון",
+     3
+    ],
+    [
+     "לערוך וידאו",
+     3
+    ],
+    [
+     "edit video",
+     3
+    ],
+    [
+     "video editing",
+     3
+    ],
+    [
+     "קליפ",
+     2
+    ],
+    [
+     "תערוך",
+     1
+    ],
+    [
+     "הוק",
+     3
+    ],
+    [
+     "hook",
+     2
+    ],
+    [
+     "תערוך את הסרטון",
+     4
+    ],
+    [
+     "לערוך את הסרטון",
+     4
+    ],
+    [
+     "תערוך את הריל",
+     4
+    ],
+    [
+     "שניות הראשונות",
+     3
+    ],
+    [
+     "סרטון&אינסטגרם",
+     3
+    ],
+    [
+     "סרטון&טיקטוק",
+     3
+    ],
+    [
+     "סרטון קצר",
+     3
+    ],
+    [
+     "סרטון לרשתות",
+     3
+    ],
+    [
+     "לפני ואחרי",
+     2
+    ]
+   ],
+   "query": "edit short vertical video reel captions hook cut retention hebrew",
+   "team": {
+    "lead": [
+     "ai-video-editing-workflow"
+    ],
+    "support": [
+     "reel-edit-hooks",
+     "caption-animation",
+     "hyperframes"
+    ],
+    "check": [
+     "short-form-video"
+    ]
+   },
+   "agents": [
+    "Short-Video Editing Coach"
+   ],
+   "note": "Hebrew captions: right-to-left, check a few frames. Approve the cut plan before rendering.",
+   "yields_to": [
+    "conversion_page",
+    "website_build",
+    "social_link",
+    "portfolio"
+   ],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "video_motion",
+   "label": "סרטון הסבר / תדמית באנימציה",
+   "triggers": [
+    [
+     "סרטון הסבר",
+     4
+    ],
+    [
+     "סרטון תדמית",
+     4
+    ],
+    [
+     "סרט תדמית",
+     4
+    ],
+    [
+     "motion graphics",
+     4
+    ],
+    [
+     "מושן",
+     3
+    ],
+    "explainer",
+    "promo video",
+    "launch video",
+    [
+     "סרטון אנימציה",
+     4
+    ],
+    [
+     "סרטון באנימציה",
+     4
+    ],
+    [
+     "אנימציה של",
+     2
+    ],
+    [
+     "אנימציית",
+     2
+    ],
+    "kinetic",
+    "סרטון השקה"
+   ],
+   "query": "animated explainer promo motion graphics video product launch hyperframes",
+   "team": {
+    "lead": [
+     "hyperframes"
+    ],
+    "support": [
+     "motion-graphics",
+     "product-launch-video",
+     "motion-studio",
+     "launch-brief"
+    ],
+    "check": [
+     "general-video"
+    ]
+   },
+   "agents": [
+    "Visual Storyteller"
+   ],
+   "note": "Storyboard and facts file first; approve before rendering.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "video_music",
+   "label": "קליפ ממוזיקה / תמונות",
+   "triggers": [
+    [
+     "מוזיקה",
+     3
+    ],
+    [
+     "שיר",
+     2
+    ],
+    [
+     "מנגינה",
+     3
+    ],
+    "beat",
+    "lyric",
+    [
+     "קליפ",
+     2
+    ],
+    [
+     "מהתמונות",
+     3
+    ],
+    [
+     "מתמונות",
+     3
+    ],
+    "slideshow",
+    "סיכום שבוע"
+   ],
+   "query": "music beat synced video slideshow photos clip montage",
+   "team": {
+    "lead": [
+     "music-to-video"
+    ],
+    "support": [
+     "hyperframes",
+     "ai-video-editing-workflow",
+     "media-use"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "Use music the owner has the rights to (media-use records the license).",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "video_ai_gen",
+   "label": "סרטון AI / דמות",
+   "triggers": [
+    [
+     "דמות ai",
+     4
+    ],
+    [
+     "דמות בינה",
+     4
+    ],
+    [
+     "ai video",
+     4
+    ],
+    [
+     "סרטון ai",
+     4
+    ],
+    [
+     "וידאו ai",
+     4
+    ],
+    [
+     "סרט ai",
+     4
+    ],
+    "seedance",
+    "kling",
+    "higgsfield",
+    "ai influencer",
+    "אינפלואנסר",
+    [
+     "ארוך&ai",
+     3
+    ],
+    [
+     "סרט ארוך",
+     3
+    ],
+    [
+     "סרטון ארוך",
+     3
+    ]
+   ],
+   "query": "ai generated video character consistency prompt seedance scenes budget",
+   "team": {
+    "lead": [
+     "long-ai-video-pack"
+    ],
+    "support": [
+     "seedance-prompt",
+     "ai-influencer-builder",
+     "shot-budgeter"
+    ],
+    "check": [
+     "model-ab-test"
+    ]
+   },
+   "agents": [],
+   "note": "Generation spends credits (Higgsfield): show the price and wait for the owner's yes.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "social_link",
+   "label": "קישור לסרטון / פוסט",
+   "triggers": [
+    [
+     "http",
+     3
+    ],
+    [
+     "קישור",
+     2
+    ],
+    [
+     "לינק",
+     2
+    ],
+    [
+     "מה אומר הסרטון",
+     3
+    ],
+    [
+     "מה כל אחד מהסרטונים",
+     4
+    ],
+    "watch this",
+    "this reel",
+    "this video",
+    [
+     "קישור ל",
+     3
+    ],
+    [
+     "לינק ל",
+     3
+    ],
+    [
+     "שלחו לי קישור",
+     4
+    ],
+    [
+     "שלח לי קישור",
+     4
+    ],
+    [
+     "על מה הסרטון",
+     4
+    ],
+    [
+     "הסרטון הזה& מה ",
+     3
+    ],
+    [
+     "הסרטונים האלה& מה ",
+     3
+    ],
+    [
+     "מה כל אחד מהסרטונים",
+     4
+    ]
+   ],
+   "query": "open link video reel post instagram tiktok youtube watch transcript frames",
+   "team": {
+    "lead": [
+     "open-social-link"
+    ],
+    "support": [
+     "watch"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "If Instagram answers 429 or a login wall, stop; ask for a screen recording.",
+   "yields_to": [
+    "ig_content"
+   ],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "ig_content",
+   "label": "תוכן לאינסטגרם",
+   "triggers": [
+    [
+     "אינסטגרם",
+     2
+    ],
+    [
+     "instagram",
+     2
+    ],
+    [
+     "סטורי",
+     2
+    ],
+    [
+     "stories",
+     2
+    ],
+    [
+     "קרוסלה",
+     3
+    ],
+    [
+     "carousel",
+     3
+    ],
+    [
+     "פוסט",
+     1
+    ],
+    [
+     "תוכן לשבוע",
+     3
+    ],
+    [
+     "תוכנית תוכן",
+     3
+    ],
+    [
+     "content plan",
+     3
+    ],
+    [
+     "ביו",
+     3
+    ],
+    [
+     "bio",
+     2
+    ],
+    [
+     "פרופיל העסקי",
+     3
+    ]
+   ],
+   "query": "instagram content plan caption carousel story reel hook post",
+   "team": {
+    "lead": [
+     "instagram-content-copilot"
+    ],
+    "support": [
+     "ig-profile",
+     "ig-caption",
+     "ig-carousel",
+     "ig-plan",
+     "ig-story",
+     "ig-reel"
+    ],
+    "check": [
+     "ig-human"
+    ]
+   },
+   "agents": [
+    "Instagram Curator"
+   ],
+   "note": "Drafts only; posting is a separate step the owner approves.",
+   "yields_to": [
+    "ig_publish",
+    "ig_read",
+    "social_link",
+    "video_short_edit"
+   ],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "ig_publish",
+   "label": "פרסום באינסטגרם",
+   "triggers": [
+    [
+     "להעלות פוסט",
+     4
+    ],
+    [
+     "תעלה לאינסטגרם",
+     4
+    ],
+    [
+     "לפרסם באינסטגרם",
+     4
+    ],
+    [
+     "תפרסם",
+     2
+    ],
+    [
+     "publish to instagram",
+     4
+    ],
+    [
+     "post to instagram",
+     4
+    ],
+    [
+     "תעלה את הפוסט",
+     4
+    ],
+    [
+     "פרסום באינסטגרם",
+     3
+    ]
+   ],
+   "query": "publish post instagram api work account caption",
+   "team": {
+    "lead": [
+     "web-operator"
+    ],
+    "support": [
+     "ig-caption",
+     "ig-human"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "ig_publish.py prepare, show the exact media and caption, publish only after the owner's yes.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "ig_read",
+   "label": "ניתוח חשבון אינסטגרם",
+   "triggers": [
+    [
+     "תתחבר לאינסטגרם",
+     4
+    ],
+    [
+     "ריל הצליח",
+     4
+    ],
+    [
+     "הצליח",
+     2
+    ],
+    [
+     "סטטיסטיקות",
+     2
+    ],
+    [
+     "insights",
+     3
+    ],
+    [
+     "לא עוקבים",
+     3
+    ],
+    [
+     "לגלוש באינסטגרם",
+     4
+    ],
+    [
+     "תכנס לאינסטגרם",
+     4
+    ],
+    [
+     "ביצועים של הריל",
+     4
+    ],
+    [
+     "עוקבים",
+     2
+    ]
+   ],
+   "query": "instagram account analytics insights audit profile reach performance",
+   "team": {
+    "lead": [
+     "ig-account-insights"
+    ],
+    "support": [
+     "ig-audit",
+     "web-operator",
+     "ig-profile",
+     "ig-viral"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "Own account: official API (ig_read.py mine). Other accounts: only Business/Creator via ig_read.py; otherwise a screen recording.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "logo_brand",
+   "label": "לוגו / מיתוג",
+   "triggers": [
+    [
+     "לוגו",
+     3
+    ],
+    [
+     "מיתוג",
+     3
+    ],
+    "logo",
+    "branding",
+    [
+     "זהות מותג",
+     3
+    ],
+    [
+     "צבעים למותג",
+     3
+    ],
+    [
+     "שם לעסק",
+     2
+    ],
+    [
+     "באנר",
+     2
+    ],
+    [
+     "פוסטר",
+     2
+    ]
+   ],
+   "query": "logo brand identity colors typography banner poster visual",
+   "team": {
+    "lead": [
+     "design"
+    ],
+    "support": [
+     "brand",
+     "brand-discovery",
+     "banner-design",
+     "canvas-design"
+    ],
+    "check": [
+     "avoid-ai-design"
+    ]
+   },
+   "agents": [
+    "Brand Guardian"
+   ],
+   "note": "Animating a finished logo: wiggle.",
+   "yields_to": [
+    "logo_animation"
+   ],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "copywriting",
+   "label": "כתיבה שיווקית",
+   "triggers": [
+    [
+     "קופי",
+     3
+    ],
+    "copywriting",
+    [
+     "טקסט שיווקי",
+     3
+    ],
+    [
+     "כותרות",
+     2
+    ],
+    [
+     "כותרת",
+     2
+    ],
+    "headline",
+    [
+     "תיאור למוצר",
+     3
+    ],
+    [
+     "טקסט למכירה",
+     3
+    ],
+    [
+     "סלוגן",
+     3
+    ],
+    "slogan"
+   ],
+   "query": "copywriting marketing copy headline product description persuasion",
+   "team": {
+    "lead": [
+     "copywriting"
+    ],
+    "support": [
+     "copy-editing",
+     "humanizer",
+     "ad-creative",
+     "marketing-psychology"
+    ],
+    "check": [
+     "avoid-ai-writing"
+    ]
+   },
+   "agents": [
+    "Content Creator"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "ads_paid",
+   "label": "פרסום ממומן",
+   "triggers": [
+    [
+     "מודעות",
+     3
+    ],
+    [
+     "מודעה",
+     3
+    ],
+    [
+     "קמפיין",
+     3
+    ],
+    [
+     "פרסום ממומן",
+     4
+    ],
+    [
+     "ממומן",
+     3
+    ],
+    [
+     "google ads",
+     4
+    ],
+    [
+     "meta ads",
+     4
+    ],
+    [
+     "facebook ads",
+     4
+    ],
+    [
+     "פייסבוק",
+     2
+    ],
+    "roas"
+   ],
+   "query": "paid ads campaign meta google creative targeting budget roas",
+   "team": {
+    "lead": [
+     "ads"
+    ],
+    "support": [
+     "ad-creative",
+     "marketing-campaign",
+     "analytics",
+     "attribution"
+    ],
+    "check": [
+     "cro"
+    ]
+   },
+   "agents": [
+    "Paid Media Auditor"
+   ],
+   "note": "Never spend ad money without the owner's yes on the exact budget.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "leads_outreach",
+   "label": "לידים ופנייה לעסקים",
+   "triggers": [
+    [
+     "לידים",
+     3
+    ],
+    [
+     "ליד",
+     2
+    ],
+    [
+     "prospect",
+     3
+    ],
+    [
+     "cold outreach",
+     4
+    ],
+    [
+     "cold email",
+     4
+    ],
+    [
+     "מכור להם",
+     3
+    ],
+    [
+     "למכור להם",
+     3
+    ],
+    [
+     "תסריט שיחה",
+     4
+    ],
+    [
+     "שיחת טלפון",
+     3
+    ],
+    [
+     "שיחת מכירה",
+     3
+    ],
+    [
+     "לפנות לעסקים",
+     4
+    ],
+    [
+     "עסקים בגדרה",
+     3
+    ],
+    [
+     "עסקים מקומיים",
+     3
+    ],
+    [
+     "local businesses",
+     3
+    ],
+    [
+     "לקוח ראשון",
+     3
+    ],
+    [
+     "לקוחות חדשים",
+     3
+    ],
+    "pitch",
+    "outreach",
+    [
+     "בעל עסק",
+     3
+    ],
+    [
+     "בעלי עסקים",
+     3
+    ],
+    [
+     "להציע אתר",
+     3
+    ],
+    [
+     "להציע שירות",
+     3
+    ],
+    [
+     "הודעה ללקוח",
+     3
+    ],
+    [
+     "הודעת וואטסאפ",
+     3
+    ],
+    [
+     "הודעה לבעל",
+     3
+    ]
+   ],
+   "query": "prospecting outreach cold email local businesses leads sales script first client",
+   "team": {
+    "lead": [
+     "prospecting"
+    ],
+    "support": [
+     "cold-email",
+     "first-client-funnel",
+     "sales-enablement",
+     "business-pro-max"
+    ],
+    "check": [
+     "customer-research"
+    ]
+   },
+   "agents": [
+    "Sales Outreach",
+    "Outbound Strategist"
+   ],
+   "note": "Drafts only: the owner sends every message. Facts come from sources; a missing website is only 'not found in search'.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "biz_opportunity",
+   "label": "הזדמנות עסקית / מוצר",
+   "triggers": [
+    [
+     "רעיון עסקי",
+     4
+    ],
+    [
+     "רעיונות לביזנס",
+     4
+    ],
+    [
+     "רעיונות לעסק",
+     4
+    ],
+    [
+     "להרוויח כסף",
+     4
+    ],
+    [
+     "דרופשיפינג",
+     4
+    ],
+    "dropshipping",
+    [
+     "מוצר מנצח",
+     4
+    ],
+    "winning product",
+    [
+     "ספקים",
+     3
+    ],
+    "אליאקספרס",
+    "aliexpress",
+    "alibaba",
+    [
+     "מחקר שוק",
+     4
+    ],
+    "market research",
+    [
+     "מתחרים",
+     3
+    ],
+    "competitor",
+    [
+     "טרנדים",
+     3
+    ],
+    "trend",
+    [
+     "ויראלי",
+     3
+    ],
+    [
+     "של המתחרה",
+     4
+    ],
+    [
+     "אתר של המתחרה",
+     4
+    ],
+    [
+     "ניתוח מתחרים",
+     4
+    ],
+    [
+     "רעיון לעסק",
+     4
+    ],
+    [
+     "להתחיל עסק",
+     4
+    ],
+    [
+     "לפתוח עסק",
+     4
+    ],
+    [
+     "מהבית",
+     2
+    ]
+   ],
+   "query": "business opportunity product sourcing supplier market research competitors trend margin",
+   "team": {
+    "lead": [
+     "business-pro-max"
+    ],
+    "support": [
+     "product-sourcing",
+     "market-research",
+     "competitor-profiling",
+     "competitors",
+     "pricing"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Trend Researcher"
+   ],
+   "note": "Numbers from sources only; deals are prepared for the owner's approval.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "pricing",
+   "label": "תמחור והצעת מחיר",
+   "triggers": [
+    [
+     "תמחור",
+     4
+    ],
+    [
+     "כמה לגבות",
+     4
+    ],
+    [
+     "pricing",
+     3
+    ],
+    [
+     "הצעת מחיר",
+     4
+    ],
+    "חבילות מחיר",
+    "price list",
+    [
+     "price",
+     2
+    ],
+    [
+     "how much to charge",
+     4
+    ],
+    [
+     "charge for",
+     3
+    ],
+    [
+     "כמה לגבות",
+     4
+    ],
+    [
+     "כמה לקחת",
+     4
+    ],
+    [
+     "כמה לבקש",
+     4
+    ]
+   ],
+   "query": "pricing packages offer quote value proposal margin",
+   "team": {
+    "lead": [
+     "pricing"
+    ],
+    "support": [
+     "offers",
+     "sales-enablement"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Pricing Analyst"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "ecommerce_store",
+   "label": "חנות אונליין",
+   "triggers": [
+    [
+     "חנות אונליין",
+     4
+    ],
+    [
+     "חנות",
+     2
+    ],
+    "shopify",
+    "שופיפיי",
+    "ecommerce",
+    "e-commerce",
+    [
+     "מוצרים שאני מוכר",
+     4
+    ],
+    [
+     "מוצרים למכירה",
+     4
+    ],
+    "קטלוג"
+   ],
+   "query": "online store ecommerce product page checkout conversion shopify",
+   "team": {
+    "lead": [
+     "cro"
+    ],
+    "support": [
+     "copywriting",
+     "product-sourcing",
+     "pricing",
+     "product-marketing",
+     "ui-ux-pro-max",
+     "hallmark"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "Shopify tools load through ToolSearch (+Shopify): reads are allowed; creating products or publishing needs the owner's yes.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "article",
+   "label": "מאמר / בלוג",
+   "triggers": [
+    [
+     "מאמר",
+     3
+    ],
+    [
+     "בלוג",
+     2
+    ],
+    [
+     "blog",
+     2
+    ],
+    "article",
+    [
+     "פוסט בבלוג",
+     3
+    ],
+    [
+     "תכתוב מאמר",
+     3
+    ]
+   ],
+   "query": "article blog post writing seo content",
+   "team": {
+    "lead": [
+     "article-writing"
+    ],
+    "support": [
+     "content-strategy",
+     "seo",
+     "humanizer",
+     "avoid-ai-writing"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Content Creator"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "email_sms",
+   "label": "מיילים והודעות",
+   "triggers": [
+    [
+     "מיילים",
+     3
+    ],
+    [
+     "אימייל",
+     2
+    ],
+    [
+     "email",
+     2
+    ],
+    [
+     "sms",
+     3
+    ],
+    [
+     "ניוזלטר",
+     3
+    ],
+    [
+     "drip",
+     3
+    ],
+    "sequence"
+   ],
+   "query": "email sms sequence newsletter nurture automation deliverability",
+   "team": {
+    "lead": [
+     "emails"
+    ],
+    "support": [
+     "lead-magnets",
+     "sms",
+     "churn-prevention"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Email Marketing Strategist"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "doc_word",
+   "label": "מסמך וורד",
+   "triggers": [
+    [
+     "וורד",
+     3
+    ],
+    [
+     "word",
+     2
+    ],
+    [
+     "docx",
+     4
+    ],
+    [
+     "מסמך",
+     2
+    ]
+   ],
+   "query": "word document docx report letter proposal",
+   "team": {
+    "lead": [
+     "docx"
+    ],
+    "support": [
+     "doc-coauthoring"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Document Generator"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "doc_slides",
+   "label": "מצגת",
+   "triggers": [
+    [
+     "מצגת",
+     4
+    ],
+    [
+     "pptx",
+     4
+    ],
+    [
+     "powerpoint",
+     4
+    ],
+    [
+     "presentation",
+     3
+    ],
+    [
+     "slides",
+     2
+    ]
+   ],
+   "query": "presentation slides deck pptx",
+   "team": {
+    "lead": [
+     "pptx"
+    ],
+    "support": [
+     "slides",
+     "frontend-slides"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Document Generator"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "doc_sheet",
+   "label": "אקסל / גיליון",
+   "triggers": [
+    [
+     "אקסל",
+     4
+    ],
+    [
+     "xlsx",
+     4
+    ],
+    [
+     "excel",
+     4
+    ],
+    [
+     "גיליון",
+     3
+    ],
+    [
+     "spreadsheet",
+     3
+    ]
+   ],
+   "query": "spreadsheet excel xlsx formulas",
+   "team": {
+    "lead": [
+     "xlsx"
+    ],
+    "support": [],
+    "check": []
+   },
+   "agents": [
+    "Document Generator"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "doc_pdf",
+   "label": "PDF",
+   "triggers": [
+    [
+     "pdf",
+     3
+    ],
+    [
+     "פידיאף",
+     3
+    ]
+   ],
+   "query": "pdf extract merge create",
+   "team": {
+    "lead": [
+     "pdf"
+    ],
+    "support": [],
+    "check": []
+   },
+   "agents": [
+    "Document Generator"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "dashboard_data",
+   "label": "דשבורד וגרפים",
+   "triggers": [
+    [
+     "דשבורד",
+     4
+    ],
+    [
+     "dashboard",
+     4
+    ],
+    [
+     "גרפים",
+     3
+    ],
+    [
+     "גרף",
+     2
+    ],
+    [
+     "chart",
+     3
+    ],
+    [
+     "charts",
+     3
+    ],
+    "ויזואליזציה",
+    "ניתוח נתונים"
+   ],
+   "query": "dashboard charts data visualization analytics metrics",
+   "team": {
+    "lead": [
+     "dashboard-builder"
+    ],
+    "support": [
+     "frontend-patterns",
+     "backend-patterns"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Data Visualization Engineer"
+   ],
+   "note": "Any chart in any format: also load the built-in dataviz skill.",
+   "yields_to": [],
+   "builtin": [
+    "dataviz"
+   ],
+   "kind": "deliverable"
+  },
+  {
+   "id": "trading",
+   "label": "מסחר ומניות",
+   "triggers": [
+    [
+     "מניה",
+     3
+    ],
+    [
+     "מניות",
+     3
+    ],
+    [
+     "nvda",
+     3
+    ],
+    [
+     "trading",
+     3
+    ],
+    [
+     "trade",
+     2
+    ],
+    [
+     "מסחר",
+     3
+    ],
+    [
+     "stock",
+     3
+    ],
+    [
+     "סווינג",
+     3
+    ],
+    [
+     "stop loss",
+     3
+    ],
+    [
+     "סטופ",
+     3
+    ],
+    [
+     "קריפטו",
+     3
+    ],
+    [
+     "נאסדק",
+     3
+    ],
+    [
+     "כניסה",
+     2
+    ],
+    [
+     "יציאה",
+     2
+    ]
+   ],
+   "query": "stock trading analysis entry exit stop target risk position size",
+   "team": {
+    "lead": [
+     "trader-analyst"
+    ],
+    "support": [
+     "trader-entry",
+     "trader-exit",
+     "trader-budget",
+     "trader-risk"
+    ],
+    "check": [
+     "trader-timemachine"
+    ]
+   },
+   "agents": [
+    "Financial Analyst"
+   ],
+   "note": "Paper trading by default; never place an order without the owner's yes. Not financial advice.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "bot_automation",
+   "label": "בוט / אוטומציה",
+   "triggers": [
+    [
+     "בוט",
+     3
+    ],
+    [
+     "bot",
+     3
+    ],
+    [
+     "chatbot",
+     3
+    ],
+    [
+     "צאטבוט",
+     3
+    ],
+    [
+     "צ אטבוט",
+     3
+    ],
+    [
+     "אוטומציה",
+     3
+    ],
+    [
+     "automation",
+     3
+    ],
+    "n8n",
+    "workflow",
+    "סוכן ai",
+    [
+     "בוט וואטסאפ",
+     4
+    ],
+    [
+     "whatsapp bot",
+     4
+    ],
+    [
+     "וואטסאפ&אוטומציה",
+     4
+    ],
+    [
+     "וואטסאפ&בוט",
+     4
+    ],
+    [
+     "וואטסאפ",
+     1
+    ],
+    [
+     "whatsapp",
+     1
+    ]
+   ],
+   "query": "bot chatbot automation whatsapp workflow integration agent api",
+   "team": {
+    "lead": [
+     "client-automation-scaffold"
+    ],
+    "support": [
+     "claude-api",
+     "ai-sdk",
+     "api-design",
+     "mcp-builder"
+    ],
+    "check": [
+     "security-review"
+    ]
+   },
+   "agents": [
+    "Workflow Architect"
+   ],
+   "note": "WhatsApp needs an official provider account (cost); the owner connects it, never in chat.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "testing_bug",
+   "label": "בדיקות ובאגים",
+   "triggers": [
+    [
+     "באג",
+     3
+    ],
+    [
+     "bug",
+     3
+    ],
+    [
+     "לא עובד",
+     3
+    ],
+    [
+     "לא עובדת",
+     3
+    ],
+    [
+     "שבור",
+     2
+    ],
+    [
+     "נשבר",
+     2
+    ],
+    [
+     "בדיקות",
+     2
+    ],
+    [
+     "qa",
+     2
+    ],
+    [
+     "e2e",
+     3
+    ],
+    [
+     "playwright",
+     3
+    ],
+    [
+     "שגיאה",
+     2
+    ],
+    [
+     "תבדוק",
+     1
+    ],
+    [
+     "לא נטען",
+     3
+    ],
+    [
+     "לא נטענת",
+     3
+    ],
+    [
+     "לא נטען נכון",
+     4
+    ],
+    [
+     "לא מתנהג",
+     3
+    ],
+    [
+     "נתקע",
+     2
+    ],
+    [
+     "קורס",
+     2
+    ],
+    [
+     "לא נכון",
+     1
+    ]
+   ],
+   "query": "test debug bug fix browser end to end verify playwright",
+   "team": {
+    "lead": [
+     "webapp-testing"
+    ],
+    "support": [
+     "e2e-testing",
+     "browser-qa",
+     "verification-loop",
+     "tdd-workflow"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Evidence Collector",
+    "Test Automation Engineer"
+   ],
+   "note": "Reproduce first, fix second, then run the check again.",
+   "yields_to": [
+    "seo",
+    "ig_read",
+    "access_blocked"
+   ],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "access_blocked",
+   "label": "אתר חסום / לא נפתח",
+   "triggers": [
+    [
+     "לא נפתח",
+     4
+    ],
+    [
+     "לא נפתחת",
+     4
+    ],
+    [
+     "לא מצליח לפתוח",
+     4
+    ],
+    [
+     "חסום",
+     3
+    ],
+    [
+     "חסימה",
+     3
+    ],
+    [
+     "blocked",
+     3
+    ],
+    [
+     "403",
+     3
+    ],
+    [
+     "429",
+     3
+    ],
+    [
+     "forbidden",
+     3
+    ],
+    [
+     "won't open",
+     4
+    ],
+    [
+     "cannot open",
+     4
+    ]
+   ],
+   "query": "blocked site cannot open 403 429 access login wall proxy",
+   "team": {
+    "lead": [
+     "find-a-way"
+    ],
+    "support": [
+     "web-operator",
+     "open-social-link",
+     "web-hunter"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "Never go around logins, captchas or the network rules; ask the owner for the one thing only they can do.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "security",
+   "label": "אבטחה",
+   "triggers": [
+    [
+     "אבטחה",
+     3
+    ],
+    [
+     "security",
+     3
+    ],
+    [
+     "פרצה",
+     3
+    ],
+    [
+     "vulnerab",
+     3
+    ]
+   ],
+   "query": "security review vulnerabilities auth secrets",
+   "team": {
+    "lead": [
+     "security-review"
+    ],
+    "support": [
+     "security-scan",
+     "auth"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Application Security Engineer"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "capability"
+  },
+  {
+   "id": "research",
+   "label": "מחקר ותחקור",
+   "triggers": [
+    [
+     "תחקור",
+     3
+    ],
+    [
+     "מחקר",
+     2
+    ],
+    [
+     "research",
+     2
+    ],
+    [
+     "סקירה",
+     2
+    ],
+    [
+     "השוואה בין",
+     3
+    ]
+   ],
+   "query": "deep research sources comparison report citations",
+   "team": {
+    "lead": [
+     "deep-research"
+    ],
+    "support": [
+     "market-research",
+     "exa-search"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Research Synthesist"
+   ],
+   "note": "Cite the source of every fact.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "voice",
+   "label": "קריינות וקול",
+   "triggers": [
+    [
+     "קריינות",
+     3
+    ],
+    [
+     "tts",
+     3
+    ],
+    [
+     "voiceover",
+     3
+    ],
+    [
+     "הקראה",
+     3
+    ]
+   ],
+   "query": "voiceover tts hebrew voice narration",
+   "team": {
+    "lead": [
+     "hebrew-voice-test"
+    ],
+    "support": [
+     "media-use"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Voice AI Integration Engineer"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "capability"
+  },
+  {
+   "id": "logo_animation",
+   "label": "אנימציית לוגו",
+   "triggers": [
+    [
+     "אנימציית לוגו",
+     4
+    ],
+    [
+     "לוגו מונפש",
+     4
+    ],
+    [
+     "אנימציה ללוגו",
+     4
+    ],
+    [
+     "לוגו בתנועה",
+     4
+    ],
+    "animated logo",
+    "logo animation",
+    "logo sting"
+   ],
+   "query": "animated logo lottie gif mp4 motion logo animation",
+   "team": {
+    "lead": [
+     "wiggle"
+    ],
+    "support": [
+     "text-to-lottie",
+     "motion-graphics",
+     "hyperframes"
+    ],
+    "check": [
+     "design"
+    ]
+   },
+   "agents": [
+    "Visual Storyteller"
+   ],
+   "note": "Start from the finished logo file (SVG or PNG).",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "performance",
+   "label": "מהירות האתר",
+   "triggers": [
+    [
+     "איטי",
+     3
+    ],
+    [
+     "איטית",
+     3
+    ],
+    [
+     "לטעון לאט",
+     4
+    ],
+    [
+     "מהירות האתר",
+     4
+    ],
+    [
+     "זמן טעינה",
+     4
+    ],
+    "slow",
+    "performance",
+    "lighthouse",
+    "core web vitals",
+    "נטען לאט"
+   ],
+   "query": "web performance speed core web vitals bundle images caching rendering",
+   "team": {
+    "lead": [
+     "react-performance"
+    ],
+    "support": [
+     "frontend-patterns",
+     "nextjs-turbopack",
+     "cdn-caching",
+     "runtime-cache"
+    ],
+    "check": [
+     "webapp-testing"
+    ]
+   },
+   "agents": [
+    "performance-optimizer"
+   ],
+   "note": "Measure first (Lighthouse), fix the biggest cost, measure again.",
+   "yields_to": [
+    "testing_bug"
+   ],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "accessibility",
+   "label": "נגישות",
+   "triggers": [
+    [
+     "נגישות",
+     4
+    ],
+    [
+     "נגיש",
+     3
+    ],
+    "accessibility",
+    "a11y",
+    "wcag",
+    "screen reader",
+    "קורא מסך"
+   ],
+   "query": "accessibility a11y wcag aria keyboard contrast screen reader audit",
+   "team": {
+    "lead": [
+     "accessibility"
+    ],
+    "support": [
+     "frontend-a11y",
+     "webapp-testing"
+    ],
+    "check": [
+     "avoid-ai-design"
+    ]
+   },
+   "agents": [
+    "Accessibility Auditor"
+   ],
+   "note": "Audit with real checks (axe or Lighthouse), then fix; Israeli law follows WCAG 2.0 AA.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "investor_pitch",
+   "label": "משקיעים וגיוס",
+   "triggers": [
+    [
+     "משקיעים",
+     4
+    ],
+    [
+     "משקיע",
+     3
+    ],
+    "investor",
+    "pitch deck",
+    [
+     "גיוס הון",
+     4
+    ],
+    [
+     "סבב גיוס",
+     4
+    ]
+   ],
+   "query": "investor pitch deck fundraising materials outreach",
+   "team": {
+    "lead": [
+     "investor-materials"
+    ],
+    "support": [
+     "investor-outreach",
+     "pptx",
+     "slides"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Proposal Strategist"
+   ],
+   "note": "Use only numbers the owner gives or a source shows.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "product_launch",
+   "label": "השקת מוצר",
+   "triggers": [
+    [
+     "השקת",
+     4
+    ],
+    [
+     "השקה",
+     3
+    ],
+    [
+     "להשיק",
+     4
+    ],
+    "launch",
+    "product hunt",
+    "go to market",
+    "gtm"
+   ],
+   "query": "product launch announcement go to market plan beta waitlist",
+   "team": {
+    "lead": [
+     "launch"
+    ],
+    "support": [
+     "product-marketing",
+     "marketing-campaign",
+     "ad-creative",
+     "emails"
+    ],
+    "check": [
+     "cro"
+    ]
+   },
+   "agents": [
+    "Growth Hacker"
+   ],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "activity"
+  },
+  {
+   "id": "print_design",
+   "label": "עיצוב להדפסה",
+   "triggers": [
+    [
+     "תפריט",
+     3
+    ],
+    [
+     "menu",
+     2
+    ],
+    [
+     "פלייר",
+     4
+    ],
+    [
+     "flyer",
+     4
+    ],
+    [
+     "כרטיס ביקור",
+     4
+    ],
+    "business card",
+    [
+     "להדפסה",
+     3
+    ],
+    [
+     "הדפסה",
+     2
+    ],
+    [
+     "קטלוג מודפס",
+     4
+    ],
+    [
+     "פוסטר",
+     3
+    ],
+    "poster",
+    [
+     "שלט",
+     2
+    ]
+   ],
+   "query": "print design flyer menu poster business card layout typography",
+   "team": {
+    "lead": [
+     "canvas-design"
+    ],
+    "support": [
+     "design",
+     "brand",
+     "banner-design"
+    ],
+    "check": [
+     "avoid-ai-design"
+    ]
+   },
+   "agents": [
+    "Visual Storyteller"
+   ],
+   "note": "Print file: ask size and bleed; export a PDF.",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  },
+  {
+   "id": "app_icon",
+   "label": "אייקון לאפליקציה",
+   "triggers": [
+    [
+     "אייקון",
+     4
+    ],
+    [
+     "app icon",
+     4
+    ],
+    [
+     "icon",
+     2
+    ]
+   ],
+   "query": "app icon ios android launcher icon design",
+   "team": {
+    "lead": [
+     "ios-icon-gen"
+    ],
+    "support": [
+     "design",
+     "brand"
+    ],
+    "check": []
+   },
+   "agents": [],
+   "note": "",
+   "yields_to": [],
+   "builtin": [],
+   "kind": "deliverable"
+  }
+ ]
+}

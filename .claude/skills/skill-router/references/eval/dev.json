@@ -1,0 +1,299 @@
+[
+ {
+  "q": "תבנה לי אתר לעסק קטן עם הזמנת תורים",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design",
+   "backend-patterns",
+   "api-design"
+  ],
+  "must_not": [
+   "site-architecture",
+   "web-operator",
+   "is-agentic",
+   "frontend-slides"
+  ]
+ },
+ {
+  "q": "דף נחיתה למוצר שעון חכם",
+  "should": [
+   "hallmark",
+   "copywriting",
+   "cro",
+   "ui-ux-pro-max",
+   "offers"
+  ],
+  "must_not": [
+   "competitors",
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "מערכת CRM לניהול לקוחות",
+  "should": [
+   "backend-patterns",
+   "api-design",
+   "postgres-patterns",
+   "frontend-patterns",
+   "auth",
+   "dashboard-builder"
+  ],
+  "must_not": [
+   "prospecting",
+   "referrals",
+   "customer-research",
+   "vercel-tracing",
+   "eve"
+  ]
+ },
+ {
+  "q": "תכין תיק עבודות לעריכת וידאו",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design"
+  ],
+  "must_not": [
+   "video",
+   "code-explainer-video",
+   "music-to-video",
+   "video-editing"
+  ]
+ },
+ {
+  "q": "תערוך לי ריל לאינסטגרם עם כתוביות בעברית",
+  "should": [
+   "ai-video-editing-workflow",
+   "reel-edit-hooks",
+   "caption-animation",
+   "hyperframes"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "לוגו לעגלת קפה",
+  "should": [
+   "design",
+   "brand",
+   "brand-discovery",
+   "banner-design"
+  ],
+  "must_not": [
+   "figma",
+   "wiggle",
+   "hyperframes"
+  ]
+ },
+ {
+  "q": "פוסט אינסטגרם לעסק מקומי",
+  "should": [
+   "ig-caption",
+   "ig-carousel",
+   "ig-plan",
+   "instagram-content-copilot"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ },
+ {
+  "q": "להעלות את האתר לאוויר עם דומיין משלי",
+  "should": [
+   "vercel-cli",
+   "domains",
+   "deployments-cicd"
+  ],
+  "must_not": [
+   "vercel-tracing"
+  ]
+ },
+ {
+  "q": "תבנה אפליקציית מובייל לניהול משימות",
+  "should": [
+   "react-native-patterns",
+   "ui-ux-pro-max",
+   "frontend-patterns"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "סרטון הסבר באנימציה של דקה על המוצר שלי",
+  "should": [
+   "hyperframes",
+   "motion-graphics",
+   "product-launch-video"
+  ],
+  "must_not": [
+   "ig-reel",
+   "social"
+  ]
+ },
+ {
+  "q": "לחפש עסקים בגדרה ולהכין תסריט שיחה כדי למכור להם אתר",
+  "should": [
+   "prospecting",
+   "cold-email",
+   "first-client-funnel",
+   "sales-enablement",
+   "business-pro-max"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תבדוק למה האתר שלי לא מופיע בגוגל",
+  "should": [
+   "seo-audit",
+   "seo",
+   "ai-seo",
+   "schema"
+  ],
+  "must_not": [
+   "google-workspace-ops"
+  ]
+ },
+ {
+  "q": "קמפיין פייסבוק לעסק שלי",
+  "should": [
+   "ads",
+   "ad-creative",
+   "marketing-campaign"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "בוט וואטסאפ לקביעת תורים",
+  "should": [
+   "client-automation-scaffold",
+   "claude-api",
+   "api-design",
+   "backend-patterns"
+  ],
+  "must_not": [
+   "ig-dm"
+  ]
+ },
+ {
+  "q": "דשבורד עם גרפים של מכירות",
+  "should": [
+   "dataviz",
+   "dashboard-builder",
+   "frontend-patterns"
+  ],
+  "must_not": [
+   "prospecting"
+  ]
+ },
+ {
+  "q": "אנימציות גלילה יפות לאתר",
+  "should": [
+   "gsap-scrolltrigger",
+   "gsap-core",
+   "motion-ui",
+   "gsap-timeline"
+  ],
+  "must_not": [
+   "hyperframes"
+  ]
+ },
+ {
+  "q": "ניתוח מניה: איפה להיכנס ואיפה לצאת",
+  "should": [
+   "trader-analyst",
+   "trader-entry",
+   "trader-exit"
+  ],
+  "must_not": [
+   "market-research"
+  ]
+ },
+ {
+  "q": "הצעת מחיר ללקוח כקובץ וורד",
+  "should": [
+   "docx",
+   "offers",
+   "pricing"
+  ],
+  "must_not": [
+   "competitors"
+  ]
+ },
+ {
+  "q": "מה כל אחד מהסרטונים האלה אומר? https://www.instagram.com/reel/xyz",
+  "should": [
+   "open-social-link",
+   "watch"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "האתר לא נפתח אצלי ומקבל 403",
+  "should": [
+   "find-a-way",
+   "web-operator",
+   "open-social-link"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "לבנות חנות אונליין למוצרים שאני מוכר",
+  "should": [
+   "cro",
+   "copywriting",
+   "product-sourcing",
+   "pricing",
+   "ui-ux-pro-max"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תכתוב לי מאמר בבלוג על קפה",
+  "should": [
+   "article-writing",
+   "seo",
+   "content-strategy",
+   "humanizer"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "אתר תלת מימד לאימוני כוח",
+  "should": [
+   "threejs-animation",
+   "hallmark",
+   "ui-ux-pro-max",
+   "gsap-core"
+  ],
+  "must_not": [
+   "hyperframes"
+  ]
+ },
+ {
+  "q": "לשפר את העיצוב של האתר הקיים שלי שנראה גנרי",
+  "should": [
+   "avoid-ai-design",
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ }
+]

@@ -1,0 +1,178 @@
+[
+ {
+  "q": "תעצב לי פלייר לפתיחת עסק חדש",
+  "should": [
+   "canvas-design",
+   "design",
+   "banner-design",
+   "brand"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "אתר להזמנת קייטרינג עם סל קניות",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "cro",
+   "backend-patterns"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ },
+ {
+  "q": "תבנה אפליקציה לניהול הוצאות במובייל",
+  "should": [
+   "react-native-patterns",
+   "frontend-patterns",
+   "ui-ux-pro-max",
+   "backend-patterns"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "סרטון לאינסטגרם שמראה לפני ואחרי של שיפוץ",
+  "should": [
+   "ai-video-editing-workflow",
+   "reel-edit-hooks",
+   "ig-reel",
+   "hyperframes"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ },
+ {
+  "q": "Write a sales email sequence for new customers",
+  "should": [
+   "emails",
+   "cold-email",
+   "copywriting",
+   "lead-magnets"
+  ],
+  "must_not": [
+   "ig-dm"
+  ]
+ },
+ {
+  "q": "תבדוק לי את האתר של המתחרה ותגיד מה הם עושים טוב",
+  "should": [
+   "competitor-profiling",
+   "competitors",
+   "seo-audit",
+   "market-research"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "תרים לי את האתר לאוויר עם https",
+  "should": [
+   "vercel-cli",
+   "deployments-cicd",
+   "domains"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "מחפש רעיון לעסק קטן שאפשר להתחיל בו מהבית",
+  "should": [
+   "business-pro-max",
+   "market-research",
+   "product-sourcing"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "הגרף במסך הבית לא נטען נכון",
+  "should": [
+   "webapp-testing",
+   "e2e-testing",
+   "browser-qa",
+   "verification-loop"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "לכתוב כותרות מושכות לדף של קורס צילום",
+  "should": [
+   "copywriting",
+   "cro",
+   "copy-editing",
+   "hallmark"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "הפקת סרטון לוגו קצר עם מוזיקה",
+  "should": [
+   "wiggle",
+   "music-to-video",
+   "motion-graphics",
+   "hyperframes"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "כמה זמן ייקח לאתר להתחיל להופיע בגוגל",
+  "should": [
+   "seo-audit",
+   "seo",
+   "ai-seo",
+   "content-strategy"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "תכין חוזה עבודה בקובץ וורד",
+  "should": [
+   "docx",
+   "doc-coauthoring"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "צריך מערכת למעקב אחרי תשלומים של לקוחות",
+  "should": [
+   "backend-patterns",
+   "api-design",
+   "postgres-patterns",
+   "dashboard-builder"
+  ],
+  "must_not": [
+   "prospecting",
+   "customer-research"
+  ]
+ },
+ {
+  "q": "רוצה לפרסם את הפוסט שלי עכשיו באינסטגרם",
+  "should": [
+   "web-operator",
+   "ig-caption",
+   "ig-human"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ }
+]

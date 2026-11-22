@@ -1,0 +1,199 @@
+[
+ {
+  "q": "אתר לספר שמזמינים בו תור מהנייד",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "backend-patterns",
+   "api-design"
+  ],
+  "must_not": [
+   "web-operator",
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "Build a CRM to track my freelance clients and invoices",
+  "should": [
+   "backend-patterns",
+   "api-design",
+   "postgres-patterns",
+   "frontend-patterns"
+  ],
+  "must_not": [
+   "prospecting",
+   "customer-research",
+   "referrals"
+  ]
+ },
+ {
+  "q": "עמוד אישי שמציג את הסרטונים שערכתי",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design"
+  ],
+  "must_not": [
+   "video",
+   "music-to-video",
+   "video-editing",
+   "code-explainer-video"
+  ]
+ },
+ {
+  "q": "קליפ קצר מהתמונות והמוזיקה מהטיול",
+  "should": [
+   "music-to-video",
+   "hyperframes",
+   "ai-video-editing-workflow"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "תכין לי תוכנית תוכן לשבוע באינסטגרם",
+  "should": [
+   "ig-plan",
+   "ig-reel",
+   "ig-story",
+   "instagram-content-copilot"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ },
+ {
+  "q": "מחפש מוצר מנצח לדרופשיפינג",
+  "should": [
+   "business-pro-max",
+   "product-sourcing",
+   "market-research",
+   "competitors"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "צריך סרטון תדמית לעסק עם אנימציה ומוזיקה",
+  "should": [
+   "hyperframes",
+   "motion-graphics",
+   "product-launch-video",
+   "music-to-video"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "Write cold outreach messages to local restaurants",
+  "should": [
+   "cold-email",
+   "prospecting",
+   "first-client-funnel",
+   "sales-enablement"
+  ],
+  "must_not": [
+   "ig-dm",
+   "social"
+  ]
+ },
+ {
+  "q": "תבנה דשבורד בזמן אמת למעקב אחרי לידים",
+  "should": [
+   "dashboard-builder",
+   "dataviz",
+   "backend-patterns",
+   "frontend-patterns"
+  ],
+  "must_not": [
+   "prospecting"
+  ]
+ },
+ {
+  "q": "קידום אורגני לדף שירות של עורך דין",
+  "should": [
+   "seo-audit",
+   "seo",
+   "schema",
+   "copywriting"
+  ],
+  "must_not": [
+   "google-workspace-ops"
+  ]
+ },
+ {
+  "q": "אפליקציה לשמירת זכרונות ואירועים עם תזכורות",
+  "should": [
+   "frontend-patterns",
+   "ui-ux-pro-max",
+   "react-patterns",
+   "react-native-patterns"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "לוגו וצבעים למותג חדש של בית קפה",
+  "should": [
+   "design",
+   "brand",
+   "brand-discovery",
+   "banner-design"
+  ],
+  "must_not": [
+   "figma",
+   "wiggle"
+  ]
+ },
+ {
+  "q": "Make my landing page convert better",
+  "should": [
+   "cro",
+   "copywriting",
+   "ab-testing",
+   "hallmark"
+  ],
+  "must_not": [
+   "competitors"
+  ]
+ },
+ {
+  "q": "תתחבר לאינסטגרם שלי ותבדוק איזה ריל הצליח הכי הרבה",
+  "should": [
+   "ig-account-insights",
+   "ig-audit",
+   "web-operator"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "הכפתור באתר לא עובד, תמצא את הבאג",
+  "should": [
+   "webapp-testing",
+   "e2e-testing",
+   "browser-qa",
+   "verification-loop"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "סרט תדמית ארוך עם דמות AI",
+  "should": [
+   "ai-influencer-builder",
+   "long-ai-video-pack",
+   "seedance-prompt",
+   "shot-budgeter"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ }
+]

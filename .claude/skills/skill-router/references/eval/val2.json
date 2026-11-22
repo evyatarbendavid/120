@@ -1,0 +1,180 @@
+[
+ {
+  "q": "אני צריך אתר לקליניקה לעיסוי שמקבל פניות מהנייד",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design"
+  ],
+  "must_not": [
+   "web-operator",
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תערוך את הסרטון הזה כך שיהיה לו הוק חזק בשניות הראשונות",
+  "should": [
+   "reel-edit-hooks",
+   "ai-video-editing-workflow",
+   "hook-formulas-100",
+   "short-form-video"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "מערכת להזמנת שולחנות במסעדה",
+  "should": [
+   "backend-patterns",
+   "api-design",
+   "postgres-patterns",
+   "auth"
+  ],
+  "must_not": [
+   "prospecting",
+   "customer-research"
+  ]
+ },
+ {
+  "q": "Create a promo video for my app with animations",
+  "should": [
+   "hyperframes",
+   "motion-graphics",
+   "product-launch-video",
+   "motion-studio"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "מה לכתוב בביו של האינסטגרם העסקי שלי",
+  "should": [
+   "ig-profile",
+   "ig-caption",
+   "instagram-content-copilot"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ },
+ {
+  "q": "אני רוצה לדעת כמה לגבות על עריכת סרטון ללקוח",
+  "should": [
+   "pricing",
+   "offers",
+   "first-client-funnel",
+   "business-pro-max"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "תבנה פורטל ללקוחות שבו הם רואים את ההזמנות שלהם",
+  "should": [
+   "backend-patterns",
+   "api-design",
+   "auth",
+   "frontend-patterns"
+  ],
+  "must_not": [
+   "prospecting",
+   "customer-research"
+  ]
+ },
+ {
+  "q": "תעשה אנימציה של מוצר בתלת מימד שמסתובב",
+  "should": [
+   "threejs-animation",
+   "hallmark",
+   "gsap-core"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "Find me products to sell on Amazon with a high margin",
+  "should": [
+   "business-pro-max",
+   "product-sourcing",
+   "market-research",
+   "pricing"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "תבדוק אם יש בעיות נגישות באתר",
+  "should": [
+   "accessibility",
+   "frontend-a11y",
+   "webapp-testing"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "כתוב לי הודעת וואטסאפ קצרה כדי להציע אתר לבעל עסק",
+  "should": [
+   "cold-email",
+   "first-client-funnel",
+   "sales-enablement",
+   "prospecting"
+  ],
+  "must_not": [
+   "hallmark",
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תכין תפריט מעוצב להדפסה לבית קפה",
+  "should": [
+   "canvas-design",
+   "design",
+   "brand",
+   "banner-design"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "ליצור אייקון לאפליקציה",
+  "should": [
+   "ios-icon-gen",
+   "design",
+   "brand"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "I want to learn how to price my freelance services",
+  "should": [
+   "pricing",
+   "offers",
+   "business-pro-max"
+  ],
+  "must_not": [
+   "ig-reel"
+  ]
+ },
+ {
+  "q": "הוסף מצב כהה לאתר שלי",
+  "should": [
+   "ui-ux-pro-max",
+   "frontend-design",
+   "ui-styling",
+   "frontend-patterns"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ }
+]

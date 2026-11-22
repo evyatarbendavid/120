@@ -1,6 +1,6 @@
 ---
 name: skill-router
-description: Pick the best installed skills and agents for a build or creation request before starting the work, then use them. Scans every skill and agent available right now (repo, user folder, claude.ai account, plugins), so newly added skills are included automatically. Use this FIRST whenever the user asks to build, create, make, design, write, edit, produce or plan something non-trivial - a website, landing page, app, dashboard, video, reel, animation, logo, bot, automation, campaign, document, deck or code - and whenever they ask "which skill should I use" or "what fits this". Hebrew triggers - "תבנה", "תיצור", "תעשה לי", "תכין", "תעצב", "תכתוב", "תערוך", "איזה סקיל מתאים", "תבחר סקילים".
+description: Use FIRST when asked to build, create, make, design, write, edit or produce something non-trivial (site, app, video, reel, logo, bot, campaign, document, code) or "which skill fits": splits the task into its needs and picks the right installed skills per need. תבנה, תיצור, תעשה לי, תכין, תעצב, איזה סקיל מתאים. Searches every skill and agent installed now (repo, ~/.claude, account, plugins).
 license: MIT
 ---
 
@@ -17,37 +17,40 @@ because the routing would cost more than it saves.
 
 ## Steps
 
-1. **Pin the goal.** One line: the deliverable, who it is for, the platform or format, and any limit
-   the user stated (language, budget, deadline, style).
+1. **Break the task into needs.** One line for the goal (deliverable, who it is for, platform, limits the user stated).
+   Then list the 2-5 needs it is made of, in your head or in one line: what is being built or made (a site, an app,
+   a video), what it must do (booking, payments, a dashboard), and what comes around it (copy, hosting, SEO, tracking).
+   Tell apart the thing to deliver from the topic it is about: a portfolio *website* about video editing is a website,
+   not a video.
 
-2. **Search twice** with the bundled script. Run it from the user's project folder (so that project's
-   own skills are included) and give its full path: `<this skill's folder>/scripts/find_skills.py`.
-   - `python3 <path>/find_skills.py "<the user's request, as written>"`
-   - `python3 <path>/find_skills.py "<your own English keywords: deliverable, domain, platform, tech, style>"`
-   The script scans every skill and agent installed at this moment and ranks them. It is a shortlist,
-   not the answer: keyword scores miss intent (a skill's own description may point elsewhere), so
-   you make the final call. Tags after a name, `[key?]`, `[paid?]`, `[own computer?]`, are text hints
-   found in that skill's instructions; confirm in its `SKILL.md` before warning the user.
+2. **Search per need** with the bundled script, from the user's project folder (so that project's skills are
+   included), by its full path: `<this skill's folder>/scripts/find_skills.py`.
+   - `python3 <path>/find_skills.py "<the user's request, as written>" --need "<english keywords for need 1>" --need "<need 2>"`
+   The script recognises the usual needs by itself from Hebrew and English phrases (`references/needs.json`) and, for
+   each one, shows a team (lead / support / check skills that are installed right now) plus the best matches found by
+   searching that need alone. Your `--need` lines cover what it did not recognise, and they are searched on their
+   own too, so a skill added yesterday is found. If it printed "none recognised", rerun with `--need` lines.
+   Tags after a name, `[key?]`, `[paid?]`, `[own computer?]`, are text hints from that skill's instructions: confirm
+   in its `SKILL.md` before warning the user. The last list ("also matched") is weaker; skip it unless one fits.
 
-3. **Choose a small team.** Usually 1 lead skill, 1 to 3 supporting skills, and an agent only when the
-   task benefits from a specialist's review or a separate pass. Prefer:
+3. **Choose a small team.** Usually 1 lead skill for the main need, 1 to 3 supporting skills, and an agent only when
+   the task benefits from a specialist's review or a separate pass. Prefer:
    - the skill whose description names this exact deliverable over a general one;
-   - an entry-point skill when a family has one (for example `hyperframes` before its sub-skills,
-     `ecc-guide` for engineering choices, `ig-reel` for reels);
-   - skills that hand work to each other (for example `hallmark` to build, then `avoid-ai-design`
-     to check) over two skills that do the same thing;
-   - free and local over paid: flag any skill that needs a paid service, an API key, or the user's own
-     computer (for example `moneyprinterturbo-video`, `scroll-world`, `fal-ai-media`) before using it.
+   - an entry-point skill when a family has one (`hyperframes` before its sub-skills, `ig-plan` for Instagram planning);
+   - skills that hand work to each other (`hallmark` to build, then `avoid-ai-design` to check) over two that overlap;
+   - free and local over paid: flag any skill that needs a paid service, an API key, or the user's own computer
+     before using it.
+   Skills that live in your own skill list but not on disk (marked "built-in", such as `dataviz` or `artifact-design`)
+   are used the same way, by name through the Skill tool.
 
-4. **Look closer only when it matters.** If two candidates look equally right, read the first ~40 lines
-   of each `SKILL.md` (the path is in the script's output). For a large build where many candidates
-   compete, and the Agent tool exists, send one subagent to read the top candidates and return a ranked
-   recommendation with reasons, so the main conversation stays focused.
+4. **Look closer only when it matters.** If two candidates look equally right, read the first ~40 lines of each
+   `SKILL.md` (the path is printed once at the end). For a large build where many candidates compete, and the Agent
+   tool exists, send one subagent to read the top candidates and return a ranked recommendation with reasons.
 
-5. **Tell the user, briefly, then start.** In the user's language, a short table in the order the skills
-   will be used, marking which one leads. Then load the lead skill with the Skill tool and do the work, bringing in
-   the supporting skills at their step. Wait for the user only if they asked for a recommendation
-   alone, or the plan involves money or something hard to undo.
+5. **Tell the user, briefly, then start.** In the user's language, a short table in the order the skills will be used,
+   marking which one leads. Then load the lead skill with the Skill tool and do the work, bringing in the supporting
+   skills at their step. Wait for the user only if they asked for a recommendation alone, or the plan involves money
+   or something hard to undo.
 
 ## Output format
 
@@ -64,8 +67,14 @@ the user's computer, or a decision only the user can make (for example where a s
 
 ## Notes
 
-- Nothing to maintain: the script reads the skill folders every time, so a skill added to the repo, to
-  `~/.claude/skills`, to the claude.ai account or by a plugin shows up on the next run.
+- Nothing to maintain for new skills: the script reads the skill folders every time, so a skill added to the repo, to
+  `~/.claude/skills`, to the claude.ai account or by a plugin shows up on the next run. To teach it a new kind of
+  need, add an entry to `references/needs.json` (phrases, an English query, a lead/support/check team); never remove
+  entries the owner uses.
+- Measured 2026-11-22 with `scripts/eval_router.py` (recall of the right skills in the first 8 results; old word-match
+  router -> need-based router): 0.31 -> 0.96 and 0.33 -> 0.94 on the two sets the catalog was built from, and on three
+  sets of new requests written before the fixes 0.32 -> 0.60, 0.21 -> 0.63, 0.28 -> 0.62 (0.93, 0.88, 0.83 after
+  the gaps they showed were closed). New phrasings still miss sometimes: that is what your `--need` lines are for.
 - Account skills appear in sessions with a prefix (for example `anthropic-skills:docx`); call them by the
   name the Skill tool lists.
 - If the script finds nothing relevant, say so and work without a skill rather than forcing a poor match.

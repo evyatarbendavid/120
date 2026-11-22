@@ -1,0 +1,180 @@
+[
+ {
+  "q": "אתר תדמית לחברת שיפוצים עם טופס יצירת קשר",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design"
+  ],
+  "must_not": [
+   "web-operator",
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תיצור סרטון קצר לטיקטוק עם כתוביות מונפשות",
+  "should": [
+   "ai-video-editing-workflow",
+   "caption-animation",
+   "reel-edit-hooks",
+   "hyperframes"
+  ],
+  "must_not": [
+   "social"
+  ]
+ },
+ {
+  "q": "I need a booking system for my yoga studio with online payments",
+  "should": [
+   "backend-patterns",
+   "api-design",
+   "postgres-patterns",
+   "auth"
+  ],
+  "must_not": [
+   "prospecting",
+   "customer-research"
+  ]
+ },
+ {
+  "q": "איך לגרום ללקוחות לקנות מהדף שלי",
+  "should": [
+   "cro",
+   "copywriting",
+   "offers",
+   "hallmark"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תכין לי 5 פוסטים לקרוסלה באינסטגרם על קפה",
+  "should": [
+   "ig-carousel",
+   "ig-caption",
+   "instagram-content-copilot",
+   "ig-plan"
+  ],
+  "must_not": [
+   "web-operator"
+  ]
+ },
+ {
+  "q": "לבנות בוט טלגרם שעונה ללקוחות",
+  "should": [
+   "client-automation-scaffold",
+   "claude-api",
+   "api-design",
+   "mcp-builder"
+  ],
+  "must_not": [
+   "ig-dm"
+  ]
+ },
+ {
+  "q": "ניתוח טכני למניית טסלה ותוכנית סטופ",
+  "should": [
+   "trader-analyst",
+   "trader-exit",
+   "trader-entry",
+   "trader-risk"
+  ],
+  "must_not": [
+   "market-research"
+  ]
+ },
+ {
+  "q": "אני רוצה להציג את העבודות שלי כצלם בגלריה יפה",
+  "should": [
+   "hallmark",
+   "ui-ux-pro-max",
+   "frontend-design"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "Write a blog post about remote work productivity",
+  "should": [
+   "article-writing",
+   "content-strategy",
+   "seo",
+   "humanizer"
+  ],
+  "must_not": [
+   "ig-comment"
+  ]
+ },
+ {
+  "q": "הלקוח רוצה אנימציית לוגו קצרה",
+  "should": [
+   "wiggle",
+   "text-to-lottie",
+   "motion-graphics",
+   "brand"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "שלחו לי קישור לטיקטוק, תגיד לי על מה הסרטון",
+  "should": [
+   "open-social-link",
+   "watch"
+  ],
+  "must_not": [
+   "ig-reel",
+   "social"
+  ]
+ },
+ {
+  "q": "האתר שלי איטי בנייד",
+  "should": [
+   "react-performance",
+   "frontend-patterns",
+   "nextjs-turbopack"
+  ],
+  "must_not": [
+   "hallmark"
+  ]
+ },
+ {
+  "q": "מצגת למשקיעים על הסטארטאפ שלי",
+  "should": [
+   "pptx",
+   "slides",
+   "frontend-slides",
+   "investor-materials"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "תכנן לי קמפיין להשקת מוצר חדש",
+  "should": [
+   "launch",
+   "marketing-campaign",
+   "product-marketing",
+   "ads"
+  ],
+  "must_not": [
+   "site-architecture"
+  ]
+ },
+ {
+  "q": "דף נחיתה בעברית לקורס אונליין",
+  "should": [
+   "hallmark",
+   "cro",
+   "copywriting",
+   "ui-ux-pro-max"
+  ],
+  "must_not": [
+   "competitors"
+  ]
+ }
+]

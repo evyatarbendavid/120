@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Rank every skill and agent available right now against a request.
+"""Find the right installed skills for a task, need by need.
 
-usage: find_skills.py "keywords or the request itself" [--top 15] [--agents 6] [--json]
+usage: find_skills.py "<the request as written>" [--need "english keywords"]... [--max-needs 5] [--top 6] [--json] [-v]
 
-Scans, at run time, every place Claude Code loads skills and agents from:
-  - <project>/.claude/skills and .claude/agents (the current directory and its git root)
-  - ~/.claude/skills (including skills synced from the claude.ai account) and ~/.claude/agents
-  - ~/.claude/plugins (skills and agents that come with installed plugins)
-so a skill added anywhere is found the next time this runs; there is no list to maintain.
-Scores with BM25 over name + description (name matches weigh more) after expanding common
-Hebrew words to English. Prints a ranked shortlist; Claude makes the final choice.
+A task is a bundle of needs (a site needs design, a booking backend, hosting, copy). This script
+  1. detects the needs in the request from Hebrew/English phrases (references/needs.json), and adds any you pass with
+     --need "english keywords" (write your own list of needs, it knows your task best);
+  2. for every need shows a team: lead / support / check skills from the catalog that are installed right now, plus
+     the best keyword matches found by searching that need alone (so a skill added tomorrow is found too);
+  3. adds a whole-request keyword search as a fallback, with tools such as web-operator held back unless asked for.
+It scans, at run time, every place Claude Code loads skills and agents from:
+  <project>/.claude/skills and .claude/agents, ~/.claude/skills (including skills synced from the claude.ai account),
+  ~/.claude/agents and ~/.claude/plugins. There is no list to maintain.
+Prints a shortlist; Claude makes the final choice. Measure it: scripts/eval_router.py.
 """
 import argparse
 import json
@@ -45,7 +48,7 @@ HEB = {
     "מחקר": "research", "כתיבה": "writing", "טקסט": "text writing copy", "מאמר": "article blog writing",
     "בלוג": "blog article", "תסריט": "script video", "קריינות": "voiceover narration tts",
     "מוזיקה": "music audio", "סאונד": "audio sound", "פודקאסט": "podcast audio",
-    "קידום": "seo marketing", "גוגל": "google seo", "חיפוש": "search seo", "עסק": "business startup",
+    "קידום": "seo marketing", "גוגל": "google seo", "חיפוש": "search seo", "עסק": "business",
     "תוכנית": "plan strategy", "אסטרטגיה": "strategy", "השקה": "launch", "מכירות": "sales",
     "לקוח": "client customer", "לקוחות": "customers clients crm", "וואטסאפ": "whatsapp bot messaging",
     "טלגרם": "telegram bot", "ריאקט": "react", "נקסט": "nextjs next", "פריסה": "deploy deployment vercel",
@@ -63,6 +66,14 @@ HEB = {
     "לחפש": "search find", "חיפוש": "search find", "תמצא": "find search", "דרך": "way route",
     "לא": "", "עובד": "working fix", "חסום": "blocked access", "גישה": "access",
     "אינסטגרמי": "instagram", "רשתות": "social media", "סטורי": "story instagram", "קרוסלה": "carousel instagram",
+    # added 2026-11-22: systems, booking, local businesses, trading
+    "מערכת": "system application platform backend", "מערכות": "systems platform", "ניהול": "management admin dashboard",
+    "תיק": "portfolio", "עבודות": "portfolio work", "תורים": "booking appointment scheduling", "תור": "booking appointment",
+    "הזמנת": "booking reservation order", "מספרה": "barber salon booking", "קפה": "coffee cafe", "מסעדה": "restaurant",
+    "מסעדות": "restaurants", "ליד": "lead prospecting", "לידים": "leads prospecting outreach", "שיחה": "call script outreach",
+    "משימות": "tasks todo", "זכרונות": "memories notes", "אירועים": "events calendar", "תזכורות": "reminders notifications",
+    "בנייד": "mobile responsive", "נייד": "mobile responsive", "מובייל": "mobile", "מניה": "stock trading", "מניות": "stocks trading",
+    "כניסה": "entry trading", "יציאה": "exit trading", "הצעה": "proposal quote", "שירות": "service", "מכשיר": "device",
 }
 STOP = set("the a an and or to of for in on with my me i we you it this that is are be do make build create want need please "
            "של את על עם לי שלי זה זאת אני אתה רוצה צריך תבנה תעשה תכין ליצור לבנות משהו כמו גם וגם או אבל כי".split())
@@ -215,38 +226,217 @@ def rank(items, query):
     return scores
 
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+NEEDS_FILE = os.path.join(HERE, "..", "references", "needs.json")
+# Tools and meta skills: shown only when a need asks for them, never from a loose keyword match.
+META = {"web-operator", "find-a-way", "skill-router", "web-hunter", "skill-scout", "is-agentic", "configure-ecc", "ecc-guide",
+        "skill-stocktake", "skill-comply", "skill-host-compat", "session-start-hook", "update-config", "keybindings-help", "init",
+        "ecc-recipes", "token-card", "learn-skill", "academy-guide", "hermes-imports", "rules-distill", "continuous-learning",
+        "continuous-learning-v2", "plan-canvas", "dmux-workflows", "nanoclaw-repl", "strategic-compact", "safety-guard",
+        "gateguard", "delivery-gate", "plankton-code-quality", "inherit-legacy-style", "ck", "context-budget", "token-budget-advisor"}
+
+
+NICHE_WORDS = set("llm llms gpu gpus pytorch fine tuning finetune finetuning lora rlhf training inference model models kubernetes k8s rust golang "
+                  "go kotlin java spring django laravel rails perl flutter dart swift android hipaa healthcare bgp vlan cisco wireguard pihole "
+                  "homelab defi solidity evm quantization vllm embedding embeddings vector rag".split())
+
+
+def niche_names():
+    """Skills listed by name only (niche libraries: ML research, backend languages, healthcare, networking, crypto)."""
+    try:
+        text = open(os.path.join(HERE, "..", "references", "name-only-skills.md"), encoding="utf-8").read()
+    except OSError:
+        return set()
+    return set(re.findall(r"^- ([^:\s]+):", text, re.M))
+
+
+def load_needs():
+    try:
+        return json.load(open(NEEDS_FILE, encoding="utf-8")).get("needs", [])
+    except (OSError, ValueError):
+        return []
+
+
+def norm_query(text):
+    return " " + re.sub(r"[,.!?;:()\"'׳״/\-_]", " ", text.lower()) + " "
+
+
+def trigger_score(q, trig):
+    """Weight of one trigger in the normalised query, 0 if absent. 'a&b' needs both parts."""
+    w = 2
+    if isinstance(trig, list):
+        trig, w = trig[0], trig[1]
+    for part in trig.lower().split("&"):
+        part = part.replace("-", " ").replace("'", " ")
+        if re.fullmatch(r"[a-z0-9 .+#]+", part):
+            if not re.search(r"(?<![a-z0-9])" + re.escape(part.strip()) + r"(s|es|ing)?(?![a-z0-9])", q):
+                return 0
+        elif part not in q:
+            return 0
+    return w
+
+
+BUILD_VERBS = ["תבנה", "לבנות", "בנה", "תיצור", "ליצור", "תכין", "להכין", "תעצב", "לעצב", "בניית", "תפתח", "לפתח", "build", "create",
+               "make", "develop", "design"]
+
+
+def detect_needs(query, catalog, limit):
+    """Needs found in the request. A deliverable (site, app, video...) leads; a capability (booking, hosting...)
+    comes after the deliverables; an activity (outreach, research, trading...) competes on its score. A build verb
+    ("תבנה", "build") gives deliverables a bonus, so 'dashboard for tracking leads' starts with the dashboard."""
+    q = norm_query(query)
+    verb = any(v in q for v in BUILD_VERBS)
+    fired = []
+    for order, nd in enumerate(catalog):
+        s = sum(trigger_score(q, t) for t in nd.get("triggers", []))
+        if s >= 2:
+            fired.append((s, order, nd))
+    scores = {nd["id"]: s for s, _, nd in fired}
+    keep = [(s, o, nd) for s, o, nd in fired
+            if not any(scores.get(y, 0) >= s for y in nd.get("yields_to", []) if y != nd["id"])]
+
+    def key(x):
+        s, o, nd = x
+        kind = nd.get("kind", "activity")
+        eff = s + (3 if verb and kind == "deliverable" else 0)
+        return (1 if kind == "capability" else 0, -eff, o)
+
+    keep.sort(key=key)
+    return keep[:limit]
+
+
+def short(it, n=110):
+    d = " ".join(it["desc"].split())
+    return d if len(d) <= n else d[: n - 1] + "…"
+
+
+def build(query, extra_needs, items, max_needs, top):
+    by_name = {}
+    for it in items:
+        by_name.setdefault(it["name"], it)
+    catalog = load_needs()
+    fired = detect_needs(query + " " + " ".join(extra_needs), catalog, max_needs)
+    used = set()
+    shown = {}
+    out_needs = []
+    skills_only = [i for i in items if i["kind"] == "skill"]
+    NICHE = niche_names()
+    niche_ok = bool(set(tokens(query + " " + " ".join(extra_needs))) & NICHE_WORDS)
+
+    def more_for(kw, exclude, k, floor, ratio=0.6):
+        res = []
+        for s, it in rank(skills_only, kw):
+            if it["name"] in exclude or it["name"] in used:
+                continue
+            s2 = s * (0.35 if it["name"] in META else 1.0)
+            if (it["name"] in NICHE or os.path.basename(it["path"]) in NICHE) and not niche_ok:
+                s2 *= 0.4
+            res.append((s2, it))
+        res.sort(key=lambda x: -x[0])
+        best = res[0][0] if res else 0
+        return [(s, it) for s, it in res if s >= max(floor, ratio * best)][:k]
+
+    for s, _, nd in fired:
+        entry = {"id": nd["id"], "label": nd["label"], "score": s, "items": [], "more": [], "agents": [], "note": nd.get("note", "")}
+        team_names = set()
+        for role in ("lead", "support", "check"):
+            for name in nd["team"].get(role, []):
+                it = by_name.get(name)
+                if it and it["kind"] == "skill" and name not in team_names:
+                    team_names.add(name)
+                    if name in shown:
+                        entry.setdefault("shared", []).append({"name": name, "need": shown[name], "role": role})
+                        continue
+                    shown[name] = len(out_needs) + 1
+                    entry["items"].append({"role": role, "name": name, "kind": "skill", "desc": short(it), "path": it["path"]})
+        for name in nd.get("builtin", []):
+            entry["items"].append({"role": "support", "name": name, "kind": "skill", "desc": "built-in skill from your own skill list (not on disk)", "path": ""})
+        for name in nd.get("agents", []):
+            it = by_name.get(name)
+            if it and it["kind"] == "agent":
+                entry["agents"].append({"name": name, "desc": short(it, 90)})
+        used |= team_names
+        for sc, it in more_for(nd["query"], team_names, 2, 6.0, 0.75):
+            entry["more"].append({"name": it["name"], "desc": short(it), "path": it["path"], "score": round(sc, 2)})
+            used.add(it["name"])
+            shown[it["name"]] = len(out_needs) + 1
+        out_needs.append(entry)
+    for kw in extra_needs:
+        entry = {"id": "ad-hoc", "label": kw, "score": 0, "items": [], "more": [], "agents": [], "note": ""}
+        for sc, it in more_for(kw, set(), 5, 3.0):
+            entry["more"].append({"name": it["name"], "desc": short(it), "path": it["path"], "score": round(sc, 2)})
+            used.add(it["name"])
+        if entry["more"]:
+            out_needs.append(entry)
+    also = []
+    for sc, it in more_for(query, set(), top, 5.0 if len(out_needs) < 2 else 8.0, 0.75):
+        also.append({"name": it["name"], "desc": short(it), "path": it["path"], "score": round(sc, 2)})
+    return out_needs, also
+
+
+def print_needs(out_needs, also, verbose):
+    if not out_needs:
+        print("\nNEEDS  none recognised: use the keyword list below, or pass your own with --need \"english keywords\".")
+    for i, nd in enumerate(out_needs, 1):
+        tag = f"  [{nd['id']}]" if verbose else ""
+        print(f"\nNEED {i}: {nd['label']}{tag}")
+        for it in nd["items"]:
+            fl = needs(it["path"]) if it["path"] else []
+            print(f"  {it['role']:8} {it['name']}" + (f"  [{' '.join(fl)}]" if fl else "") + f"  ::  {it['desc']}")
+        for it in nd["more"]:
+            fl = needs(it["path"])
+            print(f"  found    {it['name']}" + (f"  [{' '.join(fl)}]" if fl else "") + f"  ::  {it['desc']}")
+        if nd.get("shared"):
+            by_need = {}
+            for sh in nd["shared"]:
+                by_need.setdefault(sh["need"], []).append(sh["name"])
+            print("  shared   " + "; ".join(f"{', '.join(v)} (see NEED {k})" for k, v in by_need.items()))
+        if nd["agents"]:
+            print("  agents   " + ", ".join(a["name"] for a in nd["agents"]))
+        if nd["note"]:
+            print(f"  note     {nd['note']}")
+    if also:
+        print("\nALSO matched by the request's own words (weaker; skip unless one fits)")
+        for it in also:
+            fl = needs(it["path"])
+            print(f"  {it['name']}" + (f"  [{' '.join(fl)}]" if fl else "") + f"  ::  {it['desc']}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("query")
-    ap.add_argument("--top", type=int, default=15)
-    ap.add_argument("--agents", type=int, default=6)
+    ap.add_argument("--need", action="append", default=[], help="a need in English keywords (repeat for each need)")
+    ap.add_argument("--max-needs", type=int, default=5)
+    ap.add_argument("--top", type=int, default=4, help="size of the whole-request fallback list")
+    ap.add_argument("--agents", type=int, default=6, help="(kept for compatibility)")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args()
     items = collect()
-    ranked = rank(items, a.query)
-    skills = [(s, it) for s, it in ranked if it["kind"] == "skill"][: a.top]
-    agents = [(s, it) for s, it in ranked if it["kind"] == "agent"][: a.agents]
     n_s = sum(1 for i in items if i["kind"] == "skill")
     n_a = len(items) - n_s
+    out_needs, also = build(a.query, a.need, items, a.max_needs, a.top)
     if a.json:
-        print(json.dumps({"indexed_skills": n_s, "indexed_agents": n_a,
-                          "skills": [dict(score=round(s, 2), needs=needs(it["path"]), **it) for s, it in skills],
-                          "agents": [dict(score=round(s, 2), **it) for s, it in agents]}, ensure_ascii=False, indent=1))
+        print(json.dumps({"indexed_skills": n_s, "indexed_agents": n_a, "needs": out_needs, "also": also,
+                          "skills": also}, ensure_ascii=False, indent=1))
         return
     print(f"INDEXED {n_s} skills, {n_a} agents (scanned now)")
-    print(f"QUERY TERMS {' '.join(dict.fromkeys(expand(a.query)))}")
-    print("\nSKILLS")
-    for s, it in skills:
-        flags = needs(it["path"])
-        print(f"{s:6.2f}  {it['name']}" + (f"  [{' '.join(flags)}]" if flags else "") + f"  ::  {it['desc'][:170]}")
-        print(f"        {it['path']}")
-    if agents:
-        print("\nAGENTS")
-        for s, it in agents:
-            print(f"{s:6.2f}  {it['name']}  ::  {it['desc'][:150]}")
-    if not skills:
-        print("(no match: try other English keywords)")
-
+    if a.verbose:
+        print(f"QUERY TERMS {' '.join(dict.fromkeys(expand(a.query)))}")
+    print_needs(out_needs, also, a.verbose)
+    roots_seen = []
+    for nd in out_needs:
+        for it in nd["items"] + nd["more"]:
+            if it.get("path"):
+                r = os.path.dirname(it["path"])
+                if r not in roots_seen:
+                    roots_seen.append(r)
+    for it in also:
+        r = os.path.dirname(it["path"])
+        if r not in roots_seen:
+            roots_seen.append(r)
+    if roots_seen:
+        print("\nSKILL.md of any name above: " + " | ".join(f"{r}/<name>/SKILL.md" for r in roots_seen[:3]))
 
 if __name__ == "__main__":
     main()
