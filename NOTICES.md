@@ -107,3 +107,4 @@ Result: no hooks, no secrets, no obfuscated code, no binaries other than one sha
 | `text-to-lottie` | [https://github.com/diffusionstudio/lottie](https://github.com/diffusionstudio/lottie), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `threejs-animation` | [https://github.com/CloudAI-X/threejs-skills](https://github.com/CloudAI-X/threejs-skills), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | MIT |
 | `wiggle` | [https://github.com/talknerdytome-labs/wiggle-claude-skill](https://github.com/talknerdytome-labs/wiggle-claude-skill), via web-hunter 2026-11-17. Vetted with scan-skills.py (no HIGH findings). | Apache-2.0 |
+| `unslop` | [https://github.com/heydamir/unslop](https://github.com/heydamir/unslop), via web-hunter 2026-11-28. Vetted with scan-skills.py (no HIGH findings). | CC-BY |
