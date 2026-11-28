@@ -92,14 +92,31 @@
     "ai slop",
     "looks generic",
     "נראה לא טוב",
-    "נראה כמו ai"
+    "נראה כמו ai",
+    [
+     "unslop",
+     4
+    ],
+    [
+     "vibecoded",
+     3
+    ],
+    [
+     "vibe coded",
+     3
+    ],
+    [
+     "עיצוב גנרי",
+     4
+    ]
    ],
    "query": "redesign improve design generic ai slop audit visual polish",
    "team": {
     "lead": [
-     "avoid-ai-design"
+     "unslop"
     ],
     "support": [
+     "avoid-ai-design",
      "hallmark",
      "ui-ux-pro-max",
      "frontend-design",
