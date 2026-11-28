@@ -1253,10 +1253,11 @@
    ],
    "note": "Drafts only; posting is a separate step the owner approves.",
    "yields_to": [
+    "video_short_edit",
     "ig_publish",
-    "ig_read",
     "social_link",
-    "video_short_edit"
+    "ig_view_public",
+    "ig_read"
    ],
    "builtin": [],
    "kind": "deliverable"
@@ -3001,6 +3002,77 @@
    "yields_to": [],
    "builtin": [],
    "kind": "deliverable"
+  },
+  {
+   "id": "ig_view_public",
+   "label": "לצפות בפרופיל או פוסט ציבורי באינסטגרם",
+   "kind": "activity",
+   "triggers": [
+    [
+     "לצפות באינסטגרם",
+     4
+    ],
+    [
+     "תיכנס לפרופיל",
+     4
+    ],
+    [
+     "תכנס לפרופיל",
+     4
+    ],
+    [
+     "תסתכל על הפרופיל",
+     4
+    ],
+    [
+     "תסתכל על האינסטגרם",
+     4
+    ],
+    [
+     "פרופיל ציבורי",
+     4
+    ],
+    [
+     "לבדוק עסק באינסטגרם",
+     4
+    ],
+    [
+     "תבדוק עסק באינסטגרם",
+     4
+    ],
+    [
+     "האינסטגרם של",
+     3
+    ],
+    [
+     "הפרופיל של",
+     3
+    ],
+    [
+     "ראה את הפרופיל",
+     3
+    ],
+    "view instagram profile",
+    "look at the instagram"
+   ],
+   "query": "view public instagram profile post bio followers captions competitor business",
+   "team": {
+    "lead": [
+     "instagram-viewer"
+    ],
+    "support": [
+     "ig-profile",
+     "ig-audit",
+     "open-social-link"
+    ],
+    "check": []
+   },
+   "agents": [
+    "Instagram Curator"
+   ],
+   "note": "Read-only. If Instagram blocks (429, login wall) say so plainly; no general-search substitute; screen recording or the official API instead.",
+   "yields_to": [],
+   "builtin": []
   }
  ]
 }

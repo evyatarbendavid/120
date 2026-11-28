@@ -45,7 +45,11 @@ Rules while signed in: read and browse only. Every like, follow, comment, DM, st
 needs the owner's yes for that exact action. Human pace (a few pages a minute, no bulk scrolling or mass profile
 visits), no scraping lists of other people's followers, no personal details out. Prefer the work account.
 
-## Read Instagram from ANY cloud session (public profiles, posts, numbers)
+## Read Instagram from ANY cloud session
+**Route 0, for public pages of other accounts: the `instagram-viewer` skill** (`scripts/ig_view.sh profile <user>` / `post <link>`):
+a real browser, like a visitor without an account; shows bio, counts, captions, likes and the latest posts as screenshots.
+Instagram limits cloud addresses quickly; on a stop, do not substitute general web search (see its OWNER.md).
+ (public profiles, posts, numbers)
 What a cloud session sees on instagram.com: profile and embed pages answer 200 but hold only an empty login shell,
 and the login page answers 429. Do not scrape, retry or dodge that. Routes that work, in order:
 1. **Official API for other Business/Creator accounts** (local businesses, creators): `scripts/ig_read.py profile <user>`
